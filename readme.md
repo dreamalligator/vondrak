@@ -10,11 +10,15 @@ This is a Python implementation of Vondrák's long term precession model and For
 #Dependencies
 The only dependency is [numpy](https://github.com/numpy/numpy).
 
+#Install
+To install the [Vondrak Python package](https://pypi.python.org/pypi/vondrak), simply `pip install vondrak`.
+
 #To-do
 1. Ensure precision
 2. Finish tests
 3. Examples & Docs
 4. Python 2/3 tests
+5. [![Build Status](https://travis-ci.org/digitalvapor/vondrak.svg)](https://travis-ci.org/digitalvapor/vondrak)
 
 #Documentation
 View [here](http://nbviewer.ipython.org/github/digitalvapor/vondrak/blob/master/vondrak/docs/documentation.ipynb), generate with `ipython nbconvert --to html documentation.ipynb`, or run `ipython notebook`.
