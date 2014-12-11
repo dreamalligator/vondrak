@@ -47,8 +47,8 @@ class testPrecession(unittest.TestCase):
         # print(rpxb_test)
         self.assertEqual(rpxb.all(), rpxb_test.all())
 
-    # def test_epj(self):
-    #     '''test julian date to julian epoch'''
-    #     epj0 = epj(1219339.078000)
-    #     epj1 = -1373.5959534565 # julian epoch
-    #     self.assertEqual(epj0, epj1)
+    def test_epj(self):
+        '''test julian date to julian epoch'''
+        epj0 = epj(1219339.078000)
+        epj1 = -1373.5959534565 # julian epoch
+        self.assertAlmostEqual(epj0, epj1, 10)

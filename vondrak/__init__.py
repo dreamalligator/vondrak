@@ -2,7 +2,7 @@
 from numpy import array, sin, cos, sqrt, append
 import math
 
-__version__ = 0.02
+__version__ = 0.03
 
 # 2Pi
 tau =  6.283185307179586476925287e0
@@ -13,7 +13,7 @@ as2r = 4.848136811095359935899141e-6
 # Obliquity at J2000.0 (radians)
 eps0 = 84381.406 * as2r
 
-def ltp_PECL(epj):
+def ltp_PECL(jepoch):
     '''Long-term precession of the ecliptic'''
 
     # There is a typographical error in the original coefficient
@@ -45,7 +45,7 @@ def ltp_PECL(epj):
     ])
 
     # Centuries since J2000
-    T = (epj-2000.0)/100.0
+    T = (jepoch-2000.0)/100.0
 
     # Initialize Pₐ and Qₐ accumulators
     P = 0.0
@@ -81,7 +81,7 @@ def ltp_PECL(epj):
     vec = array([vec0,vec1,vec2])
     return vec
 
-def ltp_PEQU(epj):
+def ltp_PEQU(jepoch):
     '''Long-term precession of the equator'''
 
     # Number of polynomial and periodic coefficients
@@ -115,7 +115,7 @@ def ltp_PEQU(epj):
     ])
 
     # Centuries since J2000
-    T = (epj-2000.0)/100.0
+    T = (jepoch-2000.0)/100.0
 
     # Initialize Pₐ and Qₐ accumulators
     X = 0.0
@@ -206,7 +206,7 @@ def pdp(a,b):
     adb = array(row)
     return adb
 
-def ltp_PMAT(epj):
+def ltp_PMAT(jepoch):
     '''Long-term precession matrix
     Given: EPJ d Julian epoch (TT)
     Return: RP d precession matrix, J2000.0 to date
@@ -218,10 +218,10 @@ def ltp_PMAT(epj):
     '''
 
     # Equator pole (bottom row of matrix)
-    peqr = ltp_PEQU(epj)
+    peqr = ltp_PEQU(jepoch)
 
     # Ecliptic pole
-    pecl = ltp_PECL(epj)
+    pecl = ltp_PECL(jepoch)
 
     # Equinox (top row of matrix)
     V = pxp(peqr, pecl) # P-vector outer product.
@@ -236,7 +236,7 @@ def ltp_PMAT(epj):
     rp = rp.reshape(3,3)
     return rp
 
-def ltp_PBMAT(epj):
+def ltp_PBMAT(jepoch):
     '''Long-term precession matrix, including GCRS frame bias.
     Given: EPJ d Julian epoch (TT)
     Return: RPB d precession-bias matrix, J2000.0 to date
@@ -257,7 +257,7 @@ def ltp_PBMAT(epj):
     DR = -0.0146 * as2r
 
     # Precession matrix.
-    rp = ltp_PMAT(epj)
+    rp = ltp_PMAT(jepoch)
 
     # Apply the bias
     rpb = array([])
@@ -273,13 +273,13 @@ def ltp_PBMAT(epj):
     rpb = rpb.reshape(3,3)
     return rpb
 
-# def epj(dj):
-#     '''Julian Date to Julian Epoch'''
-#     # based on http://www.iausofa.org/2013_1202_C/sofa/epj.c
-#     DJ00 = 2451545.0 # Reference epoch (J2000.0), Julian Date
-#     DJY = 365.25 # Days per Julian year
-#     epj = 2000.0 + (dj - DJ00)/DJY;
-#     return epj
+def epj(dj):
+    '''Julian Date to Julian Epoch'''
+    # based on http://www.iausofa.org/2013_1202_C/sofa/epj.c
+    DJ00 = 2451545.0 # Reference epoch (J2000.0), Julian Date
+    DJY = 365.25 # Days per Julian year
+    jepoch = 2000.0 + (dj - DJ00)/DJY;
+    return jepoch
 
 def ra_dec(v):
     x = v[0][0]
