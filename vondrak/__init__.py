@@ -2,6 +2,8 @@
 from numpy import array, sin, cos, sqrt, append
 import math
 
+__version__ = 0.02
+
 # 2Pi
 tau =  6.283185307179586476925287e0
 

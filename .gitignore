@@ -2,3 +2,5 @@
 .ipynb_checkpoints
 vondrak.egg-info
 vondrak/docs/documentation.html
+dist
+build
