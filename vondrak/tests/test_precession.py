@@ -1,34 +1,29 @@
 import unittest
-from numpy import allclose
 from vondrak import *
 
-epj = -1373.5959534565 # julian epoch
-
 class testPrecession(unittest.TestCase):
-    # def test_epj(self):
-    #     '''test julian date to julian epoch'''
-    #     epj0 = epj(1219339.078000)
-    #     epj1 = -1373.5959534565 # julian epoch
-    #     self.assertEqual(epj0, epj1)
 
     def test_pecl(self):
         '''test long-term precession of the ecliptic'''
+        epj = -1373.5959534565 # julian epoch
         pecl = ltp_PECL(epj)
         pecl_test = array([+0.00041724785764001342,-0.40495491104576162693,+0.91433656053126552350])
         # print(pecl)
         # print(pecl_test)
-        self.assertTrue(allclose(pecl, pecl_test))
+        self.assertEqual(pecl.all(), pecl_test.all())
 
     def test_pequ(self):
         '''test long-term precession of the equator'''
+        epj = -1373.5959534565 # julian epoch
         pequ = ltp_PEQU(epj)
         pequ_test = array([-0.29437643797369031532,-0.11719098023370257855,+0.94847708824082091796])
         # print(pequ)
         # print(pequ_test)
-        self.assertTrue(allclose(pequ, pequ_test))
+        self.assertEqual(pequ.all(), pequ_test.all())
 
     def test_pmat(self):
         '''test long-term precession matrix'''
+        epj = -1373.5959534565 # julian epoch
         rp = ltp_PMAT(epj)
         rp_test = array([
                         [+0.68473390570729557360,+0.66647794042757610444,+0.29486722236305384992],
@@ -37,10 +32,11 @@ class testPrecession(unittest.TestCase):
                         ])
         # print(rp)
         # print(rp_test)
-        self.assertTrue(allclose(rp, rp_test))
+        self.assertEqual(rp.all(), rp_test.all())
 
     def test_pbmat(self):
         '''test long-term precession matrix, including GCRS frame bias'''
+        epj = -1373.5959534565 # julian epoch
         rpxb = ltp_PBMAT(epj)
         rpxb_test = array([
                           [+0.68473392912753224372,+0.66647788221176470103,+0.29486722236305384992],
@@ -49,4 +45,10 @@ class testPrecession(unittest.TestCase):
                           ])
         # print(rpxb)
         # print(rpxb_test)
-        self.assertTrue(allclose(rpxb, rpxb_test))
+        self.assertEqual(rpxb.all(), rpxb_test.all())
+
+    # def test_epj(self):
+    #     '''test julian date to julian epoch'''
+    #     epj0 = epj(1219339.078000)
+    #     epj1 = -1373.5959534565 # julian epoch
+    #     self.assertEqual(epj0, epj1)
