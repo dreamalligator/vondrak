@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from numpy import array, sin, cos, sqrt, append
+import math
 
 # 2Pi
 tau =  6.283185307179586476925287e0
@@ -190,6 +191,19 @@ def pn(p):
     r = w
     return r, u
 
+def pdp(a,b):
+    '''p-vector inner (=scalar=dot) product.'''
+
+    # this is akin to the SOFA iauPdp, but it handles 3x3 square
+    # matrices times (dot) column vectors 3x1
+    # http://www.iausofa.org/2013_1202_C/sofa/pdp.c
+    row = []
+    for r in range(3):
+        w = a[r][0]*b[0] + a[r][1]*b[1] + a[r][2]*b[2]
+        row.append(w)
+    adb = array(row)
+    return adb
+
 def ltp_PMAT(epj):
     '''Long-term precession matrix
     Given: EPJ d Julian epoch (TT)
@@ -264,3 +278,11 @@ def ltp_PBMAT(epj):
 #     DJY = 365.25 # Days per Julian year
 #     epj = 2000.0 + (dj - DJ00)/DJY;
 #     return epj
+
+def ra_dec(v):
+    x = v[0][0]
+    y = v[1][0]
+    z = v[2][0]
+    ra = math.atan2(y,x)
+    dec = math.atan2(z,sqrt(x*x + y*y))
+    return ra, dec
