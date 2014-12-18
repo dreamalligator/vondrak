@@ -15,11 +15,6 @@ The only dependency is [numpy](https://github.com/numpy/numpy).
 #Install
 To install the [Vondrak Python package](https://pypi.python.org/pypi/vondrak), simply `pip install vondrak`. All code is hosted at [github.com/digitalvapor/vondrak](https://github.com/digitalvapor/vondrak).
 
-#To-do
-1. Ensure precision
-2. Finish tests
-3. Examples & Docs
-
 #Documentation
 View [here](http://nbviewer.ipython.org/github/digitalvapor/vondrak/blob/master/vondrak/docs/documentation.ipynb), generate with `ipython nbconvert --to html documentation.ipynb`, or run `ipython notebook`.
 
