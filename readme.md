@@ -18,5 +18,7 @@ To install the [Vondrak Python package](https://pypi.python.org/pypi/vondrak), s
 #Documentation
 View [here](http://nbviewer.ipython.org/github/digitalvapor/vondrak/blob/master/vondrak/docs/documentation.ipynb), generate with `ipython nbconvert --to html documentation.ipynb`, or run `ipython notebook`.
 
+The Sphinx docs can be generated with `make html`.
+
 #License
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
