@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <title>Vondrak</title>
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+</head>
+<body>
+    
+    <div class="section" id="vondrak">
+<h1>Vondrak<a class="headerlink" href="#vondrak" title="Permalink to this headline">¶</a></h1>
+<p><em>Vondrák&#8217;s Long Term Precession Model</em></p>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>The earth, like a wobbling top, has an axial precession which complete&#8217;s one complete cycle in approximately 26,000 years. Astronomers often choose a favorite epoch, such as J2000, to express the coordinates of astronomical bodies in celestial coordinates. To convert between orientations, one must use a rotational matrix. This project implements the Vondrák long term precession model to create such a rotational precession matrix. This is relatively accurate for hundreds of thousands of years.</p>
+<p>All credit for this precession model goes to Jan Vondrák and his colleagues.</p>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>A rotation matrix allows us to perform a rotation in Euclidean space. The rotation matrix obtained by using the Vondrák ltp model allows us to convert between the celestial orientation of J2000 and another epoch year.</p>
+<p>A new position, or orientation, whether for the past or future, can be obtained by computing a rotation matrix for the epoch date of choice. This rotation matrix is then applied to the coordinates of the standard epoch to precess the position. <strong>p₁</strong> = <strong>P·p₀</strong>, where <strong>P</strong> is the precession matrix and <strong>p₀</strong> is the original position. <strong>P</strong> is computed for every epoch date that one wishes to orient to.</p>
+<div class="math">
+\[\begin{split}p_{1} = P\cdot p_{0} = \begin{pmatrix}
+P_{11} &amp; P_{12} &amp; P_{13} \\
+P_{21} &amp; P_{22} &amp; P_{23} \\
+P_{31} &amp; P_{32} &amp; P_{33}
+\end{pmatrix}
+\begin{pmatrix}
+x\\ y\\ z
+\end{pmatrix}
+=
+\begin{pmatrix}
+P_{11}x + P_{12}y + P_{13}z \\
+P_{21}x + P_{22}y + P_{23}z \\
+P_{31}x + P_{32}y + P_{33}z
+\end{pmatrix}\end{split}\]</div>
+<p>We now have the new celestial coordinates <strong>p₁</strong> expressed in the new reference epoch. The date is specified in the original computation of position with respect to the standard epoch and then maintained when the rotation matrix is applied.</p>
+<p>Additionally, we can convert the coordinates of another epoch to the standard epoch by inverting the precession matrix. We transpose this like so</p>
+<div class="math">
+\[\begin{split}P^{-1} = \begin{pmatrix}
+P_{11} &amp; P_{12} &amp; P_{13} \\
+P_{21} &amp; P_{22} &amp; P_{23} \\
+P_{31} &amp; P_{32} &amp; P_{33}
+\end{pmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://syrte.obspm.fr/jsr/journees2010/pdf/Vondrak.pdf">Some New Thoughts About Long-Term Precession</a> (2010)</li>
+<li><a class="reference external" href="http://syrte.obspm.fr/jsr/journees2011/pdf/vondrak.pdf">New Long-Term Expressions for Precession</a> (2011)</li>
+<li><a class="reference external" href="http://www.aanda.org/articles/aa/pdf/2011/10/aa17274-11.pdf">New precession expressions, valid for long time intervals</a> (2011)</li>
+<li><a class="reference external" href="http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html">New precession expressions, valid for long time intervals (Corrigendum)</a> (2012)</li>
+</ul>
+<p>The documentation is available through the links
+in the Table of Contents below.</p>
+<p>You can also visit:</p>
+<ul class="simple">
+<li>Official <a class="reference external" href="https://pypi.python.org/pypi/vondrak">Python Package Index</a>
+entry</li>
+<li>GitHub <a class="reference external" href="https://github.com/digitalvapor/vondrak/">project page</a></li>
+<li>GitHub <a class="reference external" href="https://github.com/digitalvapor/vondrak/issues">issue tracker</a></li>
+</ul>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#periodicity">Periodicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#polaris">Polaris</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Vondrak API</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+</body>
+</html>

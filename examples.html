@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <title>Examples</title>
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+</head>
+<body>
+    
+    <p>
+        <a href="."><h3>Home</h3></a>
+    </p>
+    
+    <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<p>Some basic usage of the Vondrak module.</p>
+<div class="section" id="periodicity">
+<h2>Periodicity<a class="headerlink" href="#periodicity" title="Permalink to this headline">¶</a></h2>
+<p>This first example, shows the periodicity of ecliptic and equatorial
+components of the matrix over 400000 years.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%pylab inline
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Populating the interactive namespace from numpy and matplotlib
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">vondrak</span> <span class="kn">as</span> <span class="nn">v</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">ecl_p_matrix_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">equ_p_matrix_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">year</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">200001.0</span><span class="p">,</span> <span class="mf">200000.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">year</span><span class="p">:</span>
+    <span class="n">p_ecl</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ltp_PECL</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">p_equ</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ltp_PEQU</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ecl_p_matrix_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_ecl</span><span class="p">)</span>
+    <span class="n">equ_p_matrix_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_equ</span><span class="p">)</span>
+
+<span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">200000</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="o">-.</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">ecl_p_matrix_list</span><span class="p">)</span>
+<span class="n">show</span><span class="p">()</span>
+<span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">200000</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="o">-.</span><span class="mi">8</span><span class="p">,</span><span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">equ_p_matrix_list</span><span class="p">)</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/examples_3_0.png" src="_images/examples_3_0.png" />
+<img alt="_images/examples_3_1.png" src="_images/examples_3_1.png" />
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>We then will show how to take an initial position (for Polaris) at
+J2000, and use the rotation matrix to find the new celestial coordinates
+computed for a new epoch.</p>
+<p>The new positions (future or past of J2000) are optained by multiplying
+the coordinates of the standard epoch by the precession matrix. <strong>p₁</strong> =
+<strong>P·p₀</strong>, where <strong>P</strong> is the below precession matrix and <strong>p₀</strong> is the
+original position. The precession matrix is unitless.</p>
+<div class="math">
+\[\begin{split}P = \begin{pmatrix}
+P_{11} &amp; P_{12} &amp; P_{13} \\
+P_{21} &amp; P_{22} &amp; P_{23} \\
+P_{31} &amp; P_{32} &amp; P_{33}
+\end{pmatrix}\end{split}\]</div>
+<p>P is recomputed for every epoch date.</p>
+<div class="math">
+\[\begin{split}p_{1} = P\cdot p_{0} = \begin{pmatrix}
+P_{11} &amp; P_{12} &amp; P_{13} \\
+P_{21} &amp; P_{22} &amp; P_{23} \\
+P_{31} &amp; P_{32} &amp; P_{33}
+\end{pmatrix}
+\begin{pmatrix}
+x\\ y\\ z
+\end{pmatrix}
+=
+\begin{pmatrix}
+P_{11}x + P_{12}y + P_{13}z \\
+P_{21}x + P_{22}y + P_{23}z \\
+P_{31}x + P_{32}y + P_{33}z
+\end{pmatrix}\end{split}\]</div>
+<p>We now have the new celestial coordinates <strong>p₁</strong> expressed in the new
+reference epoch. The date is specified in the original computation of
+position in J2000 and then maintened when the rotation matrix is
+applied.</p>
+<p>Additionally, we can convert the coordinates of another epoch to J2000
+by inverting the precession matrix. We transpose this like so</p>
+<div class="math">
+\[\begin{split}P^{-1} = \begin{pmatrix}
+P_{11} &amp; P_{12} &amp; P_{13} \\
+P_{21} &amp; P_{22} &amp; P_{23} \\
+P_{31} &amp; P_{32} &amp; P_{33}
+\end{pmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="polaris">
+<h2>Polaris<a class="headerlink" href="#polaris" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">position_matrix</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dec</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ra</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">dec</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">ra</span>  <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">dec</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">z</span><span class="o">==</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">([[</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">z</span><span class="p">]])</span>
+
+<span class="k">def</span> <span class="nf">compute_polaris</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">ephem</span>
+    <span class="n">polaris</span> <span class="o">=</span> <span class="n">ephem</span><span class="o">.</span><span class="n">star</span><span class="p">(</span><span class="s">&#39;Polaris&#39;</span><span class="p">)</span>
+    <span class="n">polaris</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">),</span><span class="n">epoch</span><span class="o">=</span><span class="s">&#39;2000&#39;</span><span class="p">)</span>
+    <span class="n">ra</span> <span class="o">=</span> <span class="n">polaris</span><span class="o">.</span><span class="n">a_ra</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">polaris</span><span class="o">.</span><span class="n">a_dec</span>
+    <span class="k">return</span> <span class="n">position_matrix</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">ra</span><span class="p">,</span><span class="n">dec</span><span class="o">=</span><span class="n">dec</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">ephem</span> <span class="kn">import</span> <span class="n">hours</span> <span class="k">as</span> <span class="n">hrs</span>
+<span class="kn">from</span> <span class="nn">ephem</span> <span class="kn">import</span> <span class="n">degrees</span> <span class="k">as</span> <span class="n">deg</span>
+
+<span class="n">p0</span> <span class="o">=</span> <span class="n">compute_polaris</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ra_dec</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;RA: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hrs</span><span class="p">(</span><span class="n">ra</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;DEC: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="n">dec</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;cartesian position of Polaris in the year=2000, epoch=2000:&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;{}</span><span class="se">\n</span><span class="s">this vector has length {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">),</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="o">*</span><span class="n">z</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>RA: 2:31:47.10
+DEC: 89:15:51.0
+cartesian position of Polaris in the year=2000, epoch=2000:
+(0.010127331660770541, 0.007897050033378511, 0.99991753347673784)
+this vector has length 1.0
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">p0</span> <span class="o">=</span> <span class="n">compute_polaris</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;The position of Polaris at J2000 is </span><span class="se">\n</span><span class="s">{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p0</span><span class="p">))</span>
+<span class="n">epj</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ltp_PBMAT</span><span class="p">(</span><span class="n">epj</span><span class="p">)</span> <span class="c"># Precession matrix, GCRS</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">compute_polaris</span><span class="p">(</span><span class="n">epj</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">pdp</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;The new position of Polaris in 100000 years is </span><span class="se">\n</span><span class="s">{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>The position of Polaris at J2000 is
+[[ 0.01012733]
+ [ 0.00789705]
+ [ 0.99991753]]
+The new position of Polaris in 100000 years is
+[[ 0.31728427]
+ [-0.15847663]
+ [ 0.9349951 ]]
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ra_dec</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;In hours of right ascension and degrees of declination&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;The position of Polaris at J2000 is&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">hrs</span><span class="p">(</span><span class="n">ra</span><span class="p">)),</span><span class="nb">str</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="n">dec</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;The new position of Polaris at 100000 years is&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ra_dec</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">hrs</span><span class="p">(</span><span class="n">ra1</span><span class="p">)),</span><span class="nb">str</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="n">dec1</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>In hours of right ascension and degrees of declination
+The position of Polaris at J2000 is
+(&#39;2:31:47.10&#39;, &#39;89:15:51.0&#39;)
+The new position of Polaris at 100000 years is
+(&#39;-1:46:09.87&#39;, &#39;69:13:38.5&#39;)
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="kn">import</span> <span class="n">Basemap</span>
+
+<span class="n">width</span> <span class="o">=</span> <span class="mi">9000000</span>
+<span class="n">bm</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s">&#39;aeqd&#39;</span><span class="p">,</span>
+             <span class="n">lat_0</span><span class="o">=</span><span class="mf">70.0</span><span class="p">,</span> <span class="n">lon_0</span><span class="o">=</span><span class="mf">280.0</span><span class="p">)</span>
+<span class="n">bm</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">bm</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c"># Position of Polaris at J2000 is p0</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">13001</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ltp_PBMAT</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="c"># Precession matrix, GCRS</span>
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">compute_polaris</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">pdp</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ra_dec</span><span class="p">(</span><span class="n">p_1</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">bm</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">ra1</span><span class="p">),</span> <span class="n">degrees</span><span class="p">(</span><span class="n">dec1</span><span class="p">))</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">year</span> <span class="o">==</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">bm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">year</span> <span class="o">==</span> <span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">bm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;one cycle of precession is ~26 thousand years&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>one cycle of precession is ~26 thousand years
+</pre></div>
+</div>
+<img alt="_images/examples_9_1.png" src="_images/examples_9_1.png" />
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">width</span> <span class="o">=</span> <span class="mi">9000000</span>
+<span class="n">bm</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s">&#39;aeqd&#39;</span><span class="p">,</span>
+             <span class="n">lat_0</span><span class="o">=</span><span class="mf">70.0</span><span class="p">,</span> <span class="n">lon_0</span><span class="o">=</span><span class="mf">280.0</span><span class="p">)</span>
+<span class="n">bm</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">bm</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">200001</span><span class="p">,</span> <span class="mi">200000</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ltp_PBMAT</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="c"># Precession matrix, GCRS</span>
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">compute_polaris</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">pdp</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">p_1</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">ra_dec</span><span class="p">(</span><span class="n">p_1</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">bm</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">ra1</span><span class="p">),</span> <span class="n">degrees</span><span class="p">(</span><span class="n">dec1</span><span class="p">))</span>
+    <span class="n">bm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;here is 400000 years of Polaris</span><span class="se">\&#39;</span><span class="s"> precession&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>here is 400000 years of Polaris&#39; precession
+</pre></div>
+</div>
+<img alt="_images/examples_10_1.png" src="_images/examples_10_1.png" />
+</div>
+</div>
+
+</body>
+</html>

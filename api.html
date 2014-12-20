@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <title>Vondrak API</title>
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+</head>
+<body>
+    
+    <p>
+        <a href="."><h3>Home</h3></a>
+    </p>
+    
+    <div class="section" id="module-vondrak">
+<span id="vondrak-api"></span><h1>Vondrak API<a class="headerlink" href="#module-vondrak" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="vondrak.epj">
+<tt class="descclassname">vondrak.</tt><tt class="descname">epj</tt><big>(</big><em>dj</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#epj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.epj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Julian Date to Julian Epoch</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.ltp_PBMAT">
+<tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PBMAT</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PBMAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PBMAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Long-term precession matrix, including GCRS frame bias.
+Given: EPJ d Julian epoch (TT)
+Return: RPB d precession-bias matrix, J2000.0 to date</p>
+<p>The matrix is in the sense P_date = RPB x P_J2000,
+where P_J2000 is a vector in the Geocentric Celestial Reference
+System, and P_date is the vector with respect to the Celestial
+Intermediate Reference System at that date but with nutation
+neglected.</p>
+<p>A first order bias formulation is used, of sub-microarcsecond
+accuracy compared with a full 3D rotation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.ltp_PECL">
+<tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PECL</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PECL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PECL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Long-term precession of the ecliptic</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.ltp_PEQU">
+<tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PEQU</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PEQU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PEQU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Long-term precession of the equator</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.ltp_PMAT">
+<tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PMAT</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PMAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PMAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Long-term precession matrix
+Given: EPJ d Julian epoch (TT)
+Return: RP d precession matrix, J2000.0 to date</p>
+<p>The matrix is in the sense P_date = RP x P_J2000,
+where P_J2000 is a vector with respect to the J2000.0 mean
+equator and equinox and P_date is the same vector with respect to
+the equator and equinox of epoch EPJ.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.pdp">
+<tt class="descclassname">vondrak.</tt><tt class="descname">pdp</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pdp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pdp" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-vector inner (=scalar=dot) product.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.pn">
+<tt class="descclassname">vondrak.</tt><tt class="descname">pn</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a p-vector into modulus and unit vector.
+Given: p-vector (p)
+Return: modulus (r), and unit vector (u)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.pxp">
+<tt class="descclassname">vondrak.</tt><tt class="descname">pxp</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pxp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pxp" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-vector outer (=vector=cross) product.
+Given: two p-vectors (a and b)
+Return: a x b</p>
+</dd></dl>
+
+</div>
+
+</body>
+</html>
