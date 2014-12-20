@@ -71,7 +71,12 @@ h1, h2, h3 {
     padding-left: 5px;
 }
 .highlight {
-    background-color:#073642;
+    background-color: #073642;
+}
+dl em {
+    color: #6c71c4;
+    font-family: monospace;
+    font-style: normal;
 }
 pre {padding: 3px;}
 a {
@@ -79,9 +84,9 @@ a {
 }
 pre a {text-decoration: none;}
 pre a:hover {text-decoration: underline;}
-.math span{
-    color: black;
-}
+.math span{ color: black;}
+.reference {padding-left: 5px;}
+
 /* pip install pygments-style-solarized
 pygmentize -S solarizeddark -f html > solarizeddark.css */
 .hll { background-color: #ffffcc }

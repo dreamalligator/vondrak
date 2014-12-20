@@ -25,3 +25,4 @@ Table of Contents
     installation
     introduction
     examples
+    api
