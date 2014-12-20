@@ -2,7 +2,7 @@
 Vondrak
 =======
 
-*Vondrák's Long Term Precession Model*
+*A Python implementation of Vondrák's long term precession model and Fortran code.*
 
 .. include:: introduction.rst
 
