@@ -14,7 +14,13 @@ as2r = 4.848136811095359935899141e-6
 eps0 = 84381.406 * as2r
 
 def ltp_PECL(jepoch):
-    '''Long-term precession of the ecliptic'''
+    '''Long-term precession of the ecliptic
+
+    Given Julian epoch (TT).
+
+    Return ecliptic pole unit vector.
+
+    ``ltp_PECL`` generates the unit vector for the pole of the ecliptic, using the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean equator and equinox.'''
 
     # There is a typographical error in the original coefficient
     # C₇ for Qₐ should read 198.296701 instead of 198.296071
@@ -82,7 +88,13 @@ def ltp_PECL(jepoch):
     return vec
 
 def ltp_PEQU(jepoch):
-    '''Long-term precession of the equator'''
+    '''Long-term precession of the equator
+
+    Given Julian epoch (TT)
+
+    Return equator pole unit vector
+
+    ``ltp_PEQU`` generates the unit vector for the pole of the equator, using the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean equator and equinox.'''
 
     # Number of polynomial and periodic coefficients
     npol = 4
@@ -153,8 +165,9 @@ def ltp_PEQU(jepoch):
 
 def pxp(a,b):
     '''p-vector outer (=vector=cross) product.
-    Given: two p-vectors (a and b)
-    Return: a x b
+
+    Given two p-vectors (a and b)
+    Return a x b
     '''
 
     xa = a[0]
@@ -171,8 +184,10 @@ def pxp(a,b):
 
 def pn(p):
     '''Convert a p-vector into modulus and unit vector.
-    Given: p-vector (p)
-    Return: modulus (r), and unit vector (u)
+
+    Given p-vector (p)
+
+    Return modulus (r), and unit vector (u)
     '''
 
     # Modulus of p-vector
@@ -194,7 +209,11 @@ def pn(p):
     return r, u
 
 def pdp(a,b):
-    '''p-vector inner (=scalar=dot) product.'''
+    '''p-vector inner (=scalar=dot) product.
+
+    Given two p-vectors (a and b)
+
+    Return a * b'''
 
     # this is akin to the SOFA iauPdp, but it handles 3x3 square
     # matrices times (dot) column vectors 3x1
@@ -208,12 +227,19 @@ def pdp(a,b):
 
 def ltp_PMAT(jepoch):
     '''Long-term precession matrix
-    Given: EPJ d Julian epoch (TT)
-    Return: RP d precession matrix, J2000.0 to date
 
-    The matrix is in the sense P_date = RP x P_J2000,
-    where P_J2000 is a vector with respect to the J2000.0 mean
-    equator and equinox and P_date is the same vector with respect to
+    Given Julian epoch (TT)
+
+    Return precession matrix, J2000.0 to date
+
+    ``ltp_PMAT`` generates the 3 × 3 rotation matrix **P**, constructed using
+    Fabri parameterization (i.e. directly from the unit vectors for the ecliptic
+    and equator poles). The resulting matrix transforms vectors with respect to
+    the mean equator and equinox of epoch 2000.0 into mean place of date.
+
+    The matrix is in the sense ``P_date = RP x P_J2000``,
+    where ``P_J2000`` is a vector with respect to the J2000.0 mean
+    equator and equinox and ``P_date`` is the same vector with respect to
     the equator and equinox of epoch EPJ.
     '''
 
@@ -238,11 +264,18 @@ def ltp_PMAT(jepoch):
 
 def ltp_PBMAT(jepoch):
     '''Long-term precession matrix, including GCRS frame bias.
-    Given: EPJ d Julian epoch (TT)
-    Return: RPB d precession-bias matrix, J2000.0 to date
 
-    The matrix is in the sense P_date = RPB x P_J2000,
-    where P_J2000 is a vector in the Geocentric Celestial Reference
+    Given Julian epoch (TT)
+
+    Return precession-bias matrix, J2000.0 to date
+
+    ``ltp_PBMAT`` generates the 3 × 3 rotation matrix **P** × **B**, where **B**
+    is the “frame bias matrix” that expresses the relative orientation of the
+    GCRS and mean J2000.0 reference systems. A simple first-order implementation
+    of the frame bias is used, the departure from rigor being well under 1 μas.
+
+    The matrix is in the sense ``P_date = RPB x P_J2000``,
+    where ``P_J2000`` is a vector in the Geocentric Celestial Reference
     System, and P_date is the vector with respect to the Celestial
     Intermediate Reference System at that date but with nutation
     neglected.
@@ -282,6 +315,7 @@ def epj(dj):
     return jepoch
 
 def ra_dec(v):
+    '''Convert a cartesian position matrix to RA and Dec'''
     x = v[0][0]
     y = v[1][0]
     z = v[2][0]
