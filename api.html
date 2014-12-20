@@ -23,11 +23,15 @@
 <dl class="function">
 <dt id="vondrak.ltp_PBMAT">
 <tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PBMAT</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PBMAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PBMAT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Long-term precession matrix, including GCRS frame bias.
-Given: EPJ d Julian epoch (TT)
-Return: RPB d precession-bias matrix, J2000.0 to date</p>
-<p>The matrix is in the sense P_date = RPB x P_J2000,
-where P_J2000 is a vector in the Geocentric Celestial Reference
+<dd><p>Long-term precession matrix, including GCRS frame bias.</p>
+<p>Given Julian epoch (TT)</p>
+<p>Return precession-bias matrix, J2000.0 to date</p>
+<p><tt class="docutils literal"><span class="pre">ltp_PBMAT</span></tt> generates the 3 × 3 rotation matrix <strong>P</strong> × <strong>B</strong>, where <strong>B</strong>
+is the “frame bias matrix” that expresses the relative orientation of the
+GCRS and mean J2000.0 reference systems. A simple first-order implementation
+of the frame bias is used, the departure from rigor being well under 1 μas.</p>
+<p>The matrix is in the sense <tt class="docutils literal"><span class="pre">P_date</span> <span class="pre">=</span> <span class="pre">RPB</span> <span class="pre">x</span> <span class="pre">P_J2000</span></tt>,
+where <tt class="docutils literal"><span class="pre">P_J2000</span></tt> is a vector in the Geocentric Celestial Reference
 System, and P_date is the vector with respect to the Celestial
 Intermediate Reference System at that date but with nutation
 neglected.</p>
@@ -39,23 +43,33 @@ accuracy compared with a full 3D rotation.</p>
 <dt id="vondrak.ltp_PECL">
 <tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PECL</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PECL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PECL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Long-term precession of the ecliptic</p>
+<p>Given Julian epoch (TT).</p>
+<p>Return ecliptic pole unit vector.</p>
+<p><tt class="docutils literal"><span class="pre">ltp_PECL</span></tt> generates the unit vector for the pole of the ecliptic, using the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean equator and equinox.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="vondrak.ltp_PEQU">
 <tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PEQU</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PEQU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PEQU" title="Permalink to this definition">¶</a></dt>
 <dd><p>Long-term precession of the equator</p>
+<p>Given Julian epoch (TT)</p>
+<p>Return equator pole unit vector</p>
+<p><tt class="docutils literal"><span class="pre">ltp_PEQU</span></tt> generates the unit vector for the pole of the equator, using the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean equator and equinox.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="vondrak.ltp_PMAT">
 <tt class="descclassname">vondrak.</tt><tt class="descname">ltp_PMAT</tt><big>(</big><em>jepoch</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ltp_PMAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ltp_PMAT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Long-term precession matrix
-Given: EPJ d Julian epoch (TT)
-Return: RP d precession matrix, J2000.0 to date</p>
-<p>The matrix is in the sense P_date = RP x P_J2000,
-where P_J2000 is a vector with respect to the J2000.0 mean
-equator and equinox and P_date is the same vector with respect to
+<dd><p>Long-term precession matrix</p>
+<p>Given Julian epoch (TT)</p>
+<p>Return precession matrix, J2000.0 to date</p>
+<p><tt class="docutils literal"><span class="pre">ltp_PMAT</span></tt> generates the 3 × 3 rotation matrix <strong>P</strong>, constructed using
+Fabri parameterization (i.e. directly from the unit vectors for the ecliptic
+and equator poles). The resulting matrix transforms vectors with respect to
+the mean equator and equinox of epoch 2000.0 into mean place of date.</p>
+<p>The matrix is in the sense <tt class="docutils literal"><span class="pre">P_date</span> <span class="pre">=</span> <span class="pre">RP</span> <span class="pre">x</span> <span class="pre">P_J2000</span></tt>,
+where <tt class="docutils literal"><span class="pre">P_J2000</span></tt> is a vector with respect to the J2000.0 mean
+equator and equinox and <tt class="docutils literal"><span class="pre">P_date</span></tt> is the same vector with respect to
 the equator and equinox of epoch EPJ.</p>
 </dd></dl>
 
@@ -63,22 +77,30 @@ the equator and equinox of epoch EPJ.</p>
 <dt id="vondrak.pdp">
 <tt class="descclassname">vondrak.</tt><tt class="descname">pdp</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pdp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pdp" title="Permalink to this definition">¶</a></dt>
 <dd><p>p-vector inner (=scalar=dot) product.</p>
+<p>Given two p-vectors (a and b)</p>
+<p>Return a * b</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="vondrak.pn">
 <tt class="descclassname">vondrak.</tt><tt class="descname">pn</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a p-vector into modulus and unit vector.
-Given: p-vector (p)
-Return: modulus (r), and unit vector (u)</p>
+<dd><p>Convert a p-vector into modulus and unit vector.</p>
+<p>Given p-vector (p)</p>
+<p>Return modulus (r), and unit vector (u)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="vondrak.pxp">
 <tt class="descclassname">vondrak.</tt><tt class="descname">pxp</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#pxp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.pxp" title="Permalink to this definition">¶</a></dt>
-<dd><p>p-vector outer (=vector=cross) product.
-Given: two p-vectors (a and b)
-Return: a x b</p>
+<dd><p>p-vector outer (=vector=cross) product.</p>
+<p>Given two p-vectors (a and b)
+Return a x b</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vondrak.ra_dec">
+<tt class="descclassname">vondrak.</tt><tt class="descname">ra_dec</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#ra_dec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.ra_dec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a cartesian position matrix to RA and Dec</p>
 </dd></dl>
 
 </div>

@@ -29,7 +29,13 @@
 <span class="n">eps0</span> <span class="o">=</span> <span class="mf">84381.406</span> <span class="o">*</span> <span class="n">as2r</span>
 
 <div class="viewcode-block" id="ltp_PECL"><a class="viewcode-back" href="../api.html#vondrak.ltp_PECL">[docs]</a><span class="k">def</span> <span class="nf">ltp_PECL</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Long-term precession of the ecliptic&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Long-term precession of the ecliptic</span>
+
+<span class="sd">    Given Julian epoch (TT).</span>
+
+<span class="sd">    Return ecliptic pole unit vector.</span>
+
+<span class="sd">    ``ltp_PECL`` generates the unit vector for the pole of the ecliptic, using the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean equator and equinox.&#39;&#39;&#39;</span>
 
     <span class="c"># There is a typographical error in the original coefficient</span>
     <span class="c"># C₇ for Qₐ should read 198.296701 instead of 198.296071</span>
@@ -97,7 +103,13 @@
     <span class="k">return</span> <span class="n">vec</span>
 </div>
 <div class="viewcode-block" id="ltp_PEQU"><a class="viewcode-back" href="../api.html#vondrak.ltp_PEQU">[docs]</a><span class="k">def</span> <span class="nf">ltp_PEQU</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Long-term precession of the equator&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Long-term precession of the equator</span>
+
+<span class="sd">    Given Julian epoch (TT)</span>
+
+<span class="sd">    Return equator pole unit vector</span>
+
+<span class="sd">    ``ltp_PEQU`` generates the unit vector for the pole of the equator, using the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean equator and equinox.&#39;&#39;&#39;</span>
 
     <span class="c"># Number of polynomial and periodic coefficients</span>
     <span class="n">npol</span> <span class="o">=</span> <span class="mi">4</span>
@@ -168,8 +180,9 @@
 </div>
 <div class="viewcode-block" id="pxp"><a class="viewcode-back" href="../api.html#vondrak.pxp">[docs]</a><span class="k">def</span> <span class="nf">pxp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;p-vector outer (=vector=cross) product.</span>
-<span class="sd">    Given: two p-vectors (a and b)</span>
-<span class="sd">    Return: a x b</span>
+
+<span class="sd">    Given two p-vectors (a and b)</span>
+<span class="sd">    Return a x b</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">xa</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -186,8 +199,10 @@
 </div>
 <div class="viewcode-block" id="pn"><a class="viewcode-back" href="../api.html#vondrak.pn">[docs]</a><span class="k">def</span> <span class="nf">pn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert a p-vector into modulus and unit vector.</span>
-<span class="sd">    Given: p-vector (p)</span>
-<span class="sd">    Return: modulus (r), and unit vector (u)</span>
+
+<span class="sd">    Given p-vector (p)</span>
+
+<span class="sd">    Return modulus (r), and unit vector (u)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c"># Modulus of p-vector</span>
@@ -209,7 +224,11 @@
     <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">u</span>
 </div>
 <div class="viewcode-block" id="pdp"><a class="viewcode-back" href="../api.html#vondrak.pdp">[docs]</a><span class="k">def</span> <span class="nf">pdp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;p-vector inner (=scalar=dot) product.&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;p-vector inner (=scalar=dot) product.</span>
+
+<span class="sd">    Given two p-vectors (a and b)</span>
+
+<span class="sd">    Return a * b&#39;&#39;&#39;</span>
 
     <span class="c"># this is akin to the SOFA iauPdp, but it handles 3x3 square</span>
     <span class="c"># matrices times (dot) column vectors 3x1</span>
@@ -223,12 +242,19 @@
 </div>
 <div class="viewcode-block" id="ltp_PMAT"><a class="viewcode-back" href="../api.html#vondrak.ltp_PMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession matrix</span>
-<span class="sd">    Given: EPJ d Julian epoch (TT)</span>
-<span class="sd">    Return: RP d precession matrix, J2000.0 to date</span>
 
-<span class="sd">    The matrix is in the sense P_date = RP x P_J2000,</span>
-<span class="sd">    where P_J2000 is a vector with respect to the J2000.0 mean</span>
-<span class="sd">    equator and equinox and P_date is the same vector with respect to</span>
+<span class="sd">    Given Julian epoch (TT)</span>
+
+<span class="sd">    Return precession matrix, J2000.0 to date</span>
+
+<span class="sd">    ``ltp_PMAT`` generates the 3 × 3 rotation matrix **P**, constructed using</span>
+<span class="sd">    Fabri parameterization (i.e. directly from the unit vectors for the ecliptic</span>
+<span class="sd">    and equator poles). The resulting matrix transforms vectors with respect to</span>
+<span class="sd">    the mean equator and equinox of epoch 2000.0 into mean place of date.</span>
+
+<span class="sd">    The matrix is in the sense ``P_date = RP x P_J2000``,</span>
+<span class="sd">    where ``P_J2000`` is a vector with respect to the J2000.0 mean</span>
+<span class="sd">    equator and equinox and ``P_date`` is the same vector with respect to</span>
 <span class="sd">    the equator and equinox of epoch EPJ.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -253,11 +279,18 @@
 </div>
 <div class="viewcode-block" id="ltp_PBMAT"><a class="viewcode-back" href="../api.html#vondrak.ltp_PBMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PBMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession matrix, including GCRS frame bias.</span>
-<span class="sd">    Given: EPJ d Julian epoch (TT)</span>
-<span class="sd">    Return: RPB d precession-bias matrix, J2000.0 to date</span>
 
-<span class="sd">    The matrix is in the sense P_date = RPB x P_J2000,</span>
-<span class="sd">    where P_J2000 is a vector in the Geocentric Celestial Reference</span>
+<span class="sd">    Given Julian epoch (TT)</span>
+
+<span class="sd">    Return precession-bias matrix, J2000.0 to date</span>
+
+<span class="sd">    ``ltp_PBMAT`` generates the 3 × 3 rotation matrix **P** × **B**, where **B**</span>
+<span class="sd">    is the “frame bias matrix” that expresses the relative orientation of the</span>
+<span class="sd">    GCRS and mean J2000.0 reference systems. A simple first-order implementation</span>
+<span class="sd">    of the frame bias is used, the departure from rigor being well under 1 μas.</span>
+
+<span class="sd">    The matrix is in the sense ``P_date = RPB x P_J2000``,</span>
+<span class="sd">    where ``P_J2000`` is a vector in the Geocentric Celestial Reference</span>
 <span class="sd">    System, and P_date is the vector with respect to the Celestial</span>
 <span class="sd">    Intermediate Reference System at that date but with nutation</span>
 <span class="sd">    neglected.</span>
@@ -296,13 +329,14 @@
     <span class="n">jepoch</span> <span class="o">=</span> <span class="mf">2000.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">dj</span> <span class="o">-</span> <span class="n">DJ00</span><span class="p">)</span><span class="o">/</span><span class="n">DJY</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">jepoch</span>
 </div>
-<span class="k">def</span> <span class="nf">ra_dec</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="ra_dec"><a class="viewcode-back" href="../api.html#vondrak.ra_dec">[docs]</a><span class="k">def</span> <span class="nf">ra_dec</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Convert a cartesian position matrix to RA and Dec&#39;&#39;&#39;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">ra</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
     <span class="n">dec</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">ra</span><span class="p">,</span> <span class="n">dec</span>
+    <span class="k">return</span> <span class="n">ra</span><span class="p">,</span> <span class="n">dec</span></div>
 </pre></div>
 </body>
 </html>
