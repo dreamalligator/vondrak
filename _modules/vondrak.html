@@ -28,7 +28,7 @@
 <span class="c"># Obliquity at J2000.0 (radians)</span>
 <span class="n">eps0</span> <span class="o">=</span> <span class="mf">84381.406</span> <span class="o">*</span> <span class="n">as2r</span>
 
-<div class="viewcode-block" id="ltp_PECL"><a class="viewcode-back" href="../api.html#vondrak.ltp_PECL">[docs]</a><span class="k">def</span> <span class="nf">ltp_PECL</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
+<div class="viewcode-block" id="ltp_PECL"><a class="viewcode-back" href="../index.html#vondrak.ltp_PECL">[docs]</a><span class="k">def</span> <span class="nf">ltp_PECL</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession of the ecliptic</span>
 
 <span class="sd">    Given Julian epoch (TT).</span>
@@ -102,7 +102,7 @@
     <span class="n">vec</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">vec0</span><span class="p">,</span><span class="n">vec1</span><span class="p">,</span><span class="n">vec2</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">vec</span>
 </div>
-<div class="viewcode-block" id="ltp_PEQU"><a class="viewcode-back" href="../api.html#vondrak.ltp_PEQU">[docs]</a><span class="k">def</span> <span class="nf">ltp_PEQU</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
+<div class="viewcode-block" id="ltp_PEQU"><a class="viewcode-back" href="../index.html#vondrak.ltp_PEQU">[docs]</a><span class="k">def</span> <span class="nf">ltp_PEQU</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession of the equator</span>
 
 <span class="sd">    Given Julian epoch (TT)</span>
@@ -178,7 +178,7 @@
     <span class="n">veq</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">veq0</span><span class="p">,</span> <span class="n">veq1</span><span class="p">,</span> <span class="n">veq2</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">veq</span>
 </div>
-<div class="viewcode-block" id="pxp"><a class="viewcode-back" href="../api.html#vondrak.pxp">[docs]</a><span class="k">def</span> <span class="nf">pxp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<div class="viewcode-block" id="pxp"><a class="viewcode-back" href="../index.html#vondrak.pxp">[docs]</a><span class="k">def</span> <span class="nf">pxp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;p-vector outer (=vector=cross) product.</span>
 
 <span class="sd">    Given two p-vectors (a and b)</span>
@@ -197,7 +197,7 @@
     <span class="n">axb</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">axb</span><span class="p">,</span><span class="n">xa</span><span class="o">*</span><span class="n">yb</span> <span class="o">-</span> <span class="n">ya</span><span class="o">*</span><span class="n">xb</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">axb</span>
 </div>
-<div class="viewcode-block" id="pn"><a class="viewcode-back" href="../api.html#vondrak.pn">[docs]</a><span class="k">def</span> <span class="nf">pn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<div class="viewcode-block" id="pn"><a class="viewcode-back" href="../index.html#vondrak.pn">[docs]</a><span class="k">def</span> <span class="nf">pn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert a p-vector into modulus and unit vector.</span>
 
 <span class="sd">    Given p-vector (p)</span>
@@ -223,7 +223,7 @@
     <span class="n">r</span> <span class="o">=</span> <span class="n">w</span>
     <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">u</span>
 </div>
-<div class="viewcode-block" id="pdp"><a class="viewcode-back" href="../api.html#vondrak.pdp">[docs]</a><span class="k">def</span> <span class="nf">pdp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<div class="viewcode-block" id="pdp"><a class="viewcode-back" href="../index.html#vondrak.pdp">[docs]</a><span class="k">def</span> <span class="nf">pdp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;p-vector inner (=scalar=dot) product.</span>
 
 <span class="sd">    Given two p-vectors (a and b)</span>
@@ -240,7 +240,7 @@
     <span class="n">adb</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">adb</span>
 </div>
-<div class="viewcode-block" id="ltp_PMAT"><a class="viewcode-back" href="../api.html#vondrak.ltp_PMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
+<div class="viewcode-block" id="ltp_PMAT"><a class="viewcode-back" href="../index.html#vondrak.ltp_PMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession matrix</span>
 
 <span class="sd">    Given Julian epoch (TT)</span>
@@ -277,7 +277,7 @@
     <span class="n">rp</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rp</span>
 </div>
-<div class="viewcode-block" id="ltp_PBMAT"><a class="viewcode-back" href="../api.html#vondrak.ltp_PBMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PBMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
+<div class="viewcode-block" id="ltp_PBMAT"><a class="viewcode-back" href="../index.html#vondrak.ltp_PBMAT">[docs]</a><span class="k">def</span> <span class="nf">ltp_PBMAT</span><span class="p">(</span><span class="n">jepoch</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Long-term precession matrix, including GCRS frame bias.</span>
 
 <span class="sd">    Given Julian epoch (TT)</span>
@@ -321,7 +321,7 @@
     <span class="n">rpb</span> <span class="o">=</span> <span class="n">rpb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rpb</span>
 </div>
-<div class="viewcode-block" id="epj"><a class="viewcode-back" href="../api.html#vondrak.epj">[docs]</a><span class="k">def</span> <span class="nf">epj</span><span class="p">(</span><span class="n">dj</span><span class="p">):</span>
+<div class="viewcode-block" id="epj"><a class="viewcode-back" href="../index.html#vondrak.epj">[docs]</a><span class="k">def</span> <span class="nf">epj</span><span class="p">(</span><span class="n">dj</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Julian Date to Julian Epoch&#39;&#39;&#39;</span>
     <span class="c"># based on http://www.iausofa.org/2013_1202_C/sofa/epj.c</span>
     <span class="n">DJ00</span> <span class="o">=</span> <span class="mf">2451545.0</span> <span class="c"># Reference epoch (J2000.0), Julian Date</span>
@@ -329,7 +329,7 @@
     <span class="n">jepoch</span> <span class="o">=</span> <span class="mf">2000.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">dj</span> <span class="o">-</span> <span class="n">DJ00</span><span class="p">)</span><span class="o">/</span><span class="n">DJY</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">jepoch</span>
 </div>
-<div class="viewcode-block" id="ra_dec"><a class="viewcode-back" href="../api.html#vondrak.ra_dec">[docs]</a><span class="k">def</span> <span class="nf">ra_dec</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="ra_dec"><a class="viewcode-back" href="../index.html#vondrak.ra_dec">[docs]</a><span class="k">def</span> <span class="nf">ra_dec</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert a cartesian position matrix to RA and Dec&#39;&#39;&#39;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>

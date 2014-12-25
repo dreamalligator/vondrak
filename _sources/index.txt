@@ -26,3 +26,7 @@ Table of Contents
     introduction
     examples
     api
+
+.. include:: examples.rst
+
+.. include:: api.rst
