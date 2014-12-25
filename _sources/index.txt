@@ -27,6 +27,8 @@ Table of Contents
     examples
     api
 
+.. include:: installation.rst
+
 .. include:: examples.rst
 
 .. include:: api.rst

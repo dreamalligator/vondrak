@@ -11,11 +11,11 @@
     <div class="section" id="vondrak">
 <h1>Vondrak<a class="headerlink" href="#vondrak" title="Permalink to this headline">¶</a></h1>
 <p><em>A Python implementation of Vondrák&#8217;s long term precession model and Fortran code.</em></p>
-</div>
 <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The earth, like a wobbling top, has an axial precession which complete&#8217;s one complete cycle in approximately 26,000 years. Astronomers often choose a favorite epoch, such as J2000, to express the coordinates of astronomical bodies in celestial coordinates. To convert between orientations, one must use a rotational matrix. This project implements the Vondrák long term precession model to create such a rotational precession matrix. This is relatively accurate for hundreds of thousands of years.</p>
 <p>All credit for this precession model goes to Jan Vondrák and his colleagues.</p>
+</div>
 <div class="section" id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>A rotation matrix allows us to perform a rotation in Euclidean space. The rotation matrix obtained by using the Vondrák ltp model allows us to convert between the celestial orientation of J2000 and another epoch year.</p>
@@ -67,11 +67,9 @@ entry</li>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#implementation">Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#references">References</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#implementation">Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#references">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#periodicity">Periodicity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#implementation">Implementation</a></li>
@@ -81,6 +79,16 @@ entry</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Vondrak API</a></li>
 </ul>
 </div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>There is only one dependency for Vondrak, <a class="reference external" href="http://www.numpy.org/">NumPy</a>. You can install with <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span></tt>. You can install Vondrak as well with the standard Python package tool</p>
+<blockquote>
+<div><tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">vondrak</span></tt></div></blockquote>
+<p>If you have any problems with installation, or would like to suggest an improvement, simply create an issue on the project&#8217;s Github page:</p>
+<blockquote>
+<div><a class="reference external" href="https://github.com/digitalvapor/vondrak">https://github.com/digitalvapor/vondrak</a></div></blockquote>
+<p>Cheers!</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -291,9 +299,8 @@ The new position of Polaris at 100000 years is
 <img alt="_images/examples_10_1.png" src="_images/examples_10_1.png" />
 </div>
 </div>
-</div>
 <div class="section" id="module-vondrak">
-<span id="vondrak-api"></span><h1>Vondrak API<a class="headerlink" href="#module-vondrak" title="Permalink to this headline">¶</a></h1>
+<span id="vondrak-api"></span><h2>Vondrak API<a class="headerlink" href="#module-vondrak" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="vondrak.epj">
 <tt class="descclassname">vondrak.</tt><tt class="descname">epj</tt><big>(</big><em>dj</em><big>)</big><a class="reference internal" href="_modules/vondrak.html#epj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vondrak.epj" title="Permalink to this definition">¶</a></dt>
@@ -383,6 +390,7 @@ Return a x b</p>
 <dd><p>Convert a cartesian position matrix to RA and Dec</p>
 </dd></dl>
 
+</div>
 </div>
 
     <script>
