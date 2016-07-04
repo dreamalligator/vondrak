@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from numpy import array, sin, cos, sqrt, append
 import math
 
@@ -14,14 +13,14 @@ AS2R = 4.848136811095359935899141e-6
 EPS0 = 84381.406 * AS2R
 
 
-def ltp_PECL(jepoch):
+def ltp_pecl(jepoch):
     '''Long-term precession of the ecliptic
 
     Given Julian epoch (TT).
 
     Return ecliptic pole unit vector.
 
-    ``ltp_PECL`` generates the unit vector for the pole of the ecliptic, using
+    ``ltp_pecl`` generates the unit vector for the pole of the ecliptic, using
     the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean
     equator and equinox.'''
 
@@ -93,14 +92,14 @@ def ltp_PECL(jepoch):
     return vec
 
 
-def ltp_PEQU(jepoch):
+def ltp_pequ(jepoch):
     '''Long-term precession of the equator
 
     Given Julian epoch (TT)
 
     Return equator pole unit vector
 
-    ``ltp_PEQU`` generates the unit vector for the pole of the equator, using
+    ``ltp_pequ`` generates the unit vector for the pole of the equator, using
     the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean
     equator and equinox.
     '''
@@ -238,14 +237,14 @@ def pdp(a, b):
     return adb
 
 
-def ltp_PMAT(jepoch):
+def ltp_pmat(jepoch):
     '''Long-term precession matrix
 
     Given Julian epoch (TT)
 
     Return precession matrix, J2000.0 to date
 
-    ``ltp_PMAT`` generates the 3 × 3 rotation matrix **P**, constructed using
+    ``ltp_pmat`` generates the 3 × 3 rotation matrix **P**, constructed using
     Fabri parameterization (i.e. directly from the unit vectors for the
     ecliptic and equator poles). The resulting matrix transforms vectors with
     respect to the mean equator and equinox of epoch 2000.0 into mean place of
@@ -258,10 +257,10 @@ def ltp_PMAT(jepoch):
     '''
 
     # Equator pole (bottom row of matrix)
-    peqr = ltp_PEQU(jepoch)
+    peqr = ltp_pequ(jepoch)
 
     # Ecliptic pole
-    pecl = ltp_PECL(jepoch)
+    pecl = ltp_pecl(jepoch)
 
     # Equinox (top row of matrix)
     V = pxp(peqr, pecl)  # P-vector outer product.
@@ -277,14 +276,14 @@ def ltp_PMAT(jepoch):
     return rp
 
 
-def ltp_PBMAT(jepoch):
+def ltp_pbmat(jepoch):
     '''Long-term precession matrix, including GCRS frame bias.
 
     Given Julian epoch (TT)
 
     Return precession-bias matrix, J2000.0 to date
 
-    ``ltp_PBMAT`` generates the 3 × 3 rotation matrix **P** × **B**, where
+    ``ltp_pbmat`` generates the 3 × 3 rotation matrix **P** × **B**, where
     **B** is the “frame bias matrix” that expresses the relative orientation of
     the GCRS and mean J2000.0 reference systems. A simple first-order
     implementation of the frame bias is used, the departure from rigor being
@@ -305,7 +304,7 @@ def ltp_PBMAT(jepoch):
     DR = -0.0146 * AS2R
 
     # Precession matrix.
-    rp = ltp_PMAT(jepoch)
+    rp = ltp_pmat(jepoch)
 
     # Apply the bias
     rpb = array([])

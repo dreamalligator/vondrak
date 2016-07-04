@@ -28,11 +28,11 @@ components of the matrix over 400000 years.
     equ_p_matrix_list = []
     year = arange(-200001.0, 200000.0, 100)
     for y in year:
-        p_ecl = v.ltp_PECL(y)
-        p_equ = v.ltp_PEQU(y)
+        p_ecl = v.ltp_pecl(y)
+        p_equ = v.ltp_pequ(y)
         ecl_p_matrix_list.append(p_ecl)
         equ_p_matrix_list.append(p_equ)
-    
+
     axis([-200000,200000,-.5,1])
     plot(year, ecl_p_matrix_list)
     show()
@@ -63,9 +63,9 @@ original position. The precession matrix is unitless.
 .. math::
 
    P = \begin{pmatrix}
-   P_{11} & P_{12} & P_{13} \\ 
-   P_{21} & P_{22} & P_{23} \\ 
-   P_{31} & P_{32} & P_{33} 
+   P_{11} & P_{12} & P_{13} \\
+   P_{21} & P_{22} & P_{23} \\
+   P_{31} & P_{32} & P_{33}
    \end{pmatrix}
 
 P is recomputed for every epoch date.
@@ -73,18 +73,18 @@ P is recomputed for every epoch date.
 .. math::
 
    p_{1} = P\cdot p_{0} = \begin{pmatrix}
-   P_{11} & P_{12} & P_{13} \\ 
-   P_{21} & P_{22} & P_{23} \\ 
-   P_{31} & P_{32} & P_{33} 
+   P_{11} & P_{12} & P_{13} \\
+   P_{21} & P_{22} & P_{23} \\
+   P_{31} & P_{32} & P_{33}
    \end{pmatrix}
    \begin{pmatrix}
    x\\ y\\ z
    \end{pmatrix}
    =
    \begin{pmatrix}
-   P_{11}x + P_{12}y + P_{13}z \\ 
-   P_{21}x + P_{22}y + P_{23}z \\ 
-   P_{31}x + P_{32}y + P_{33}z 
+   P_{11}x + P_{12}y + P_{13}z \\
+   P_{21}x + P_{22}y + P_{23}z \\
+   P_{31}x + P_{32}y + P_{33}z
    \end{pmatrix}
 
 We now have the new celestial coordinates **p₁** expressed in the new
@@ -98,9 +98,9 @@ by inverting the precession matrix. We transpose this like so
 .. math::
 
    P^{-1} = \begin{pmatrix}
-   P_{11} & P_{12} & P_{13} \\ 
-   P_{21} & P_{22} & P_{23} \\ 
-   P_{31} & P_{32} & P_{33} 
+   P_{11} & P_{12} & P_{13} \\
+   P_{21} & P_{22} & P_{23} \\
+   P_{31} & P_{32} & P_{33}
    \end{pmatrix}
 
 Polaris
@@ -117,7 +117,7 @@ Polaris
             y = cos(dec) * sin(ra)
             z = sin(dec)
         return array([[x], [y], [z]])
-    
+
     def compute_polaris(year):
         import ephem
         polaris = ephem.star('Polaris')
@@ -129,7 +129,7 @@ Polaris
 
     from ephem import hours as hrs
     from ephem import degrees as deg
-    
+
     p0 = compute_polaris(2000)
     (ra, dec) = v.ra_dec(p0)
     print('RA: {}'.format(hrs(ra)))
@@ -155,18 +155,18 @@ Polaris
     p0 = compute_polaris(2000)
     print('The position of Polaris at J2000 is \n{}'.format(p0))
     epj = 100000
-    P = v.ltp_PBMAT(epj) # Precession matrix, GCRS
+    P = v.ltp_pbmat(epj) # Precession matrix, GCRS
     p1 = compute_polaris(epj)
     p1 = v.pdp(P, p1)
     print('The new position of Polaris in 100000 years is \n{}'.format(p1))
 
 .. parsed-literal::
 
-    The position of Polaris at J2000 is 
+    The position of Polaris at J2000 is
     [[ 0.01012733]
      [ 0.00789705]
      [ 0.99991753]]
-    The new position of Polaris in 100000 years is 
+    The new position of Polaris in 100000 years is
     [[ 0.31728427]
      [-0.15847663]
      [ 0.9349951 ]]
@@ -194,17 +194,17 @@ Polaris
 .. code:: python
 
     from mpl_toolkits.basemap import Basemap
-    
+
     width = 9000000
-    bm = Basemap(width=width, height=width, projection='aeqd', 
+    bm = Basemap(width=width, height=width, projection='aeqd',
                  lat_0=70.0, lon_0=280.0)
     bm.drawparallels(np.arange(-80,81,10))
     bm.drawmeridians(np.arange(-180,180,10))
-    
+
     # Position of Polaris at J2000 is p0
     years = arange(-13001, 13000, 100)
     for year in years:
-        P = v.ltp_PBMAT(year) # Precession matrix, GCRS
+        P = v.ltp_pbmat(year) # Precession matrix, GCRS
         p_1 = compute_polaris(year)
         p_1 = v.pdp(P, p1)
         (ra1, dec1) = v.ra_dec(p_1)
@@ -229,13 +229,13 @@ Polaris
 .. code:: python
 
     width = 9000000
-    bm = Basemap(width=width, height=width, projection='aeqd', 
+    bm = Basemap(width=width, height=width, projection='aeqd',
                  lat_0=70.0, lon_0=280.0)
     bm.drawparallels(np.arange(-80,81,10))
     bm.drawmeridians(np.arange(-180,180,10))
-    
+
     for year in range(-200001, 200000, 100):
-        P = v.ltp_PBMAT(year) # Precession matrix, GCRS
+        P = v.ltp_pbmat(year) # Precession matrix, GCRS
         p_1 = compute_polaris(year)
         p_1 = v.pdp(P, p_1)
         (ra1, dec1) = v.ra_dec(p_1)
@@ -250,4 +250,3 @@ Polaris
 
 
 .. image:: examples_files/examples_10_1.png
-
