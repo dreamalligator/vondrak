@@ -20,7 +20,9 @@ The only dependency is `numpy <https://github.com/numpy/numpy>`_.
 Install
 =======
 
-To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_, simply ``pip install vondrak``. All code is hosted at  `github.com/digitalvapor/vondrak <https://github.com/digitalvapor/vondrak>`_.
+To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip3 install vondrak``. For Python 2, use ``pip``. All code is hosted at `github.com/digitalvapor/vondrak <https://github.com/digitalvapor/vondrak>`_.
+
+Alternatively, clone the repo ``git clone https://github.com/digitalvapor/vondrak``, and install from source with ``python3 setup.py install``.
 
 Documentation
 =============

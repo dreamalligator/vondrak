@@ -2,16 +2,17 @@
 from numpy import array, sin, cos, sqrt, append
 import math
 
-__version__ = 0.03
+__version__ = 0.4
 
 # 2Pi
-tau =  6.283185307179586476925287e0
+TAU = 6.283185307179586476925287e0
 
 # Arcseconds to radians
-as2r = 4.848136811095359935899141e-6
+AS2R = 4.848136811095359935899141e-6
 
 # Obliquity at J2000.0 (radians)
-eps0 = 84381.406 * as2r
+EPS0 = 84381.406 * AS2R
+
 
 def ltp_PECL(jepoch):
     '''Long-term precession of the ecliptic
@@ -20,11 +21,14 @@ def ltp_PECL(jepoch):
 
     Return ecliptic pole unit vector.
 
-    ``ltp_PECL`` generates the unit vector for the pole of the ecliptic, using the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean equator and equinox.'''
+    ``ltp_PECL`` generates the unit vector for the pole of the ecliptic, using
+    the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean
+    equator and equinox.'''
 
     # There is a typographical error in the original coefficient
     # C₇ for Qₐ should read 198.296701 instead of 198.296071
-    # Src: http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html
+    # Src:
+    # http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html
 
     # Number of polynomial and periodic coefficients
     npol = 4
@@ -32,10 +36,10 @@ def ltp_PECL(jepoch):
 
     # Polynomial coefficients
     pqpol = array([
-        [+5851.607687,-1600.886300],
-        [-0.1189000,+1.1689818],
-        [-0.00028913,-0.00000020],
-        [+0.000000101,-0.000000437],
+        [+5851.607687, -1600.886300],
+        [-0.1189000, +1.1689818],
+        [-0.00028913, -0.00000020],
+        [+0.000000101, -0.000000437]
     ])
 
     # Periodic coefficients
@@ -46,8 +50,9 @@ def ltp_PECL(jepoch):
         [492.20, 413.442940, -356.652376, 376.202861, 421.535876],
         [1183.00, 78.614193, -186.387003, 184.778874, -36.776172],
         [622.00, -180.732815, -316.800070, 335.321713, -145.278396],
-        [882.00, -87.676083, 198.296701, -185.138669, -34.744450], # corrected coefficient per erratum
-        [547.00, 46.140315, 101.135679, -120.972830, 22.885731],
+        # corrected coefficient per erratum
+        [882.00, -87.676083, 198.296701, -185.138669, -34.744450],
+        [547.00, 46.140315, 101.135679, -120.972830, 22.885731]
     ])
 
     # Centuries since J2000
@@ -58,8 +63,8 @@ def ltp_PECL(jepoch):
     Q = 0.0
 
     # Periodic Terms
-    for i in range(0,nper):
-        W = tau*T
+    for i in range(0, nper):
+        W = TAU*T
         A = W/pqper[i][0]
         S = sin(A)
         C = cos(A)
@@ -68,24 +73,25 @@ def ltp_PECL(jepoch):
 
     # Polynomial Terms
     W = 1.0
-    for i in range(0,npol):
+    for i in range(0, npol):
         P = P + pqpol[i][0]*W
         Q = Q + pqpol[i][1]*W
         W = W*T
 
     # Pₐ and Qₐ (radians)
-    P = P*as2r
-    Q = Q*as2r
+    P = P*AS2R
+    Q = Q*AS2R
 
     # Form the ecliptic pole vector
-    Z = sqrt(max(1.0-P*P-Q*Q,0.0))
-    S = sin(eps0)
-    C = cos(eps0)
+    Z = sqrt(max(1.0-P*P-Q*Q, 0.0))
+    S = sin(EPS0)
+    C = cos(EPS0)
     vec0 = P
     vec1 = -Q*C - Z*S
     vec2 = -Q*S + Z*C
-    vec = array([vec0,vec1,vec2])
+    vec = array([vec0, vec1, vec2])
     return vec
+
 
 def ltp_PEQU(jepoch):
     '''Long-term precession of the equator
@@ -94,7 +100,10 @@ def ltp_PEQU(jepoch):
 
     Return equator pole unit vector
 
-    ``ltp_PEQU`` generates the unit vector for the pole of the equator, using the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean equator and equinox.'''
+    ``ltp_PEQU`` generates the unit vector for the pole of the equator, using
+    the series for Xₐ, Yₐ. The vector is with respect to the J2000.0 mean
+    equator and equinox.
+    '''
 
     # Number of polynomial and periodic coefficients
     npol = 4
@@ -102,16 +111,16 @@ def ltp_PEQU(jepoch):
 
     # Polynomial coefficients
     xypol = array([
-        [+5453.282155,-73750.930350],
-        [+0.4252841,-0.7675452],
-        [-0.00037173,-0.00018725],
-        [-0.000000152,+0.000000231],
+        [+5453.282155, -73750.930350],
+        [+0.4252841, -0.7675452],
+        [-0.00037173, -0.00018725],
+        [-0.000000152, +0.000000231]
     ])
 
     # Periodic coefficients
     xyper = array([
         [256.75, -819.940624, 75004.344875, 81491.287984, 1558.515853],
-        [708.15, -8444.676815, 624.033993, 787.163481, 7774.939698,],
+        [708.15, -8444.676815, 624.033993, 787.163481, 7774.939698],
         [274.20, 2600.009459, 1251.136893, 1251.296102, -2219.534038],
         [241.45, 2755.175630, -1102.212834, -1257.950837, -2523.969396],
         [2309.00, -167.659835, -2660.664980, -2966.799730, 247.850422],
@@ -123,7 +132,7 @@ def ltp_PEQU(jepoch):
         [620.00, -189.793622, 558.116553, 524.429630, 235.934465],
         [157.87, -402.922932, -23.923029, -13.549067, 374.049623],
         [220.30, 179.516345, -165.405086, -210.157124, -171.330180],
-        [1200.00, -9.814756, 9.344131, -44.919798, -22.899655],
+        [1200.00, -9.814756, 9.344131, -44.919798, -22.899655]
     ])
 
     # Centuries since J2000
@@ -134,8 +143,8 @@ def ltp_PEQU(jepoch):
     Y = 0.0
 
     # Periodic Terms
-    for i in range(0,nper):
-        W = tau*T
+    for i in range(0, nper):
+        W = TAU*T
         A = W/xyper[i][0]
         S = sin(A)
         C = cos(A)
@@ -144,14 +153,14 @@ def ltp_PEQU(jepoch):
 
     # Polynomial Terms
     W = 1.0
-    for i in range(0,npol):
+    for i in range(0, npol):
         X = X + xypol[i][0]*W
         Y = Y + xypol[i][1]*W
         W = W*T
 
     # X and Y (direction cosines)
-    X = X*as2r
-    Y = Y*as2r
+    X = X*AS2R
+    Y = Y*AS2R
 
     # Form the equator pole vector
     veq0 = X
@@ -163,7 +172,8 @@ def ltp_PEQU(jepoch):
     veq = array([veq0, veq1, veq2])
     return veq
 
-def pxp(a,b):
+
+def pxp(a, b):
     '''p-vector outer (=vector=cross) product.
 
     Given two p-vectors (a and b)
@@ -177,10 +187,11 @@ def pxp(a,b):
     yb = b[1]
     zb = b[2]
     axb = array([])
-    axb = append(axb,ya*zb - za*yb)
-    axb = append(axb,za*xb - xa*zb)
-    axb = append(axb,xa*yb - ya*xb)
+    axb = append(axb, ya*zb - za*yb)
+    axb = append(axb, za*xb - xa*zb)
+    axb = append(axb, xa*yb - ya*xb)
     return axb
+
 
 def pn(p):
     '''Convert a p-vector into modulus and unit vector.
@@ -197,7 +208,7 @@ def pn(p):
     if(w == 0.0):
         # zero a p-vector
         # http://www.iausofa.org/2013_1202_C/sofa/zp.c
-        u = append(u,[0.0, 0.0, 0.0])
+        u = append(u, [0.0, 0.0, 0.0])
     else:
         # unit vector
         # http://www.iausofa.org/2013_1202_C/sofa/sxp.c
@@ -208,7 +219,8 @@ def pn(p):
     r = w
     return r, u
 
-def pdp(a,b):
+
+def pdp(a, b):
     '''p-vector inner (=scalar=dot) product.
 
     Given two p-vectors (a and b)
@@ -225,6 +237,7 @@ def pdp(a,b):
     adb = array(row)
     return adb
 
+
 def ltp_PMAT(jepoch):
     '''Long-term precession matrix
 
@@ -233,14 +246,15 @@ def ltp_PMAT(jepoch):
     Return precession matrix, J2000.0 to date
 
     ``ltp_PMAT`` generates the 3 × 3 rotation matrix **P**, constructed using
-    Fabri parameterization (i.e. directly from the unit vectors for the ecliptic
-    and equator poles). The resulting matrix transforms vectors with respect to
-    the mean equator and equinox of epoch 2000.0 into mean place of date.
+    Fabri parameterization (i.e. directly from the unit vectors for the
+    ecliptic and equator poles). The resulting matrix transforms vectors with
+    respect to the mean equator and equinox of epoch 2000.0 into mean place of
+    date.
 
-    The matrix is in the sense ``P_date = RP x P_J2000``,
-    where ``P_J2000`` is a vector with respect to the J2000.0 mean
-    equator and equinox and ``P_date`` is the same vector with respect to
-    the equator and equinox of epoch EPJ.
+    The matrix is in the sense ``P_date = RP x P_J2000``, where ``P_J2000`` is
+    a vector with respect to the J2000.0 mean equator and equinox and
+    ``P_date`` is the same vector with respect to the equator and equinox of
+    epoch EPJ.
     '''
 
     # Equator pole (bottom row of matrix)
@@ -250,8 +264,8 @@ def ltp_PMAT(jepoch):
     pecl = ltp_PECL(jepoch)
 
     # Equinox (top row of matrix)
-    V = pxp(peqr, pecl) # P-vector outer product.
-    w, EQX = pn(V) # Convert a p-vector into modulus and unit vector
+    V = pxp(peqr, pecl)  # P-vector outer product.
+    w, EQX = pn(V)  # Convert a p-vector into modulus and unit vector
 
     # Middle row of matrix
     V = pxp(peqr, EQX)
@@ -259,8 +273,9 @@ def ltp_PMAT(jepoch):
     # The matrix elements
     rp = array([])
     rp = append(rp, [EQX, V, peqr])
-    rp = rp.reshape(3,3)
+    rp = rp.reshape(3, 3)
     return rp
+
 
 def ltp_PBMAT(jepoch):
     '''Long-term precession matrix, including GCRS frame bias.
@@ -269,56 +284,58 @@ def ltp_PBMAT(jepoch):
 
     Return precession-bias matrix, J2000.0 to date
 
-    ``ltp_PBMAT`` generates the 3 × 3 rotation matrix **P** × **B**, where **B**
-    is the “frame bias matrix” that expresses the relative orientation of the
-    GCRS and mean J2000.0 reference systems. A simple first-order implementation
-    of the frame bias is used, the departure from rigor being well under 1 μas.
+    ``ltp_PBMAT`` generates the 3 × 3 rotation matrix **P** × **B**, where
+    **B** is the “frame bias matrix” that expresses the relative orientation of
+    the GCRS and mean J2000.0 reference systems. A simple first-order
+    implementation of the frame bias is used, the departure from rigor being
+    well under 1 μas.
 
-    The matrix is in the sense ``P_date = RPB x P_J2000``,
-    where ``P_J2000`` is a vector in the Geocentric Celestial Reference
-    System, and P_date is the vector with respect to the Celestial
-    Intermediate Reference System at that date but with nutation
-    neglected.
+    The matrix is in the sense ``P_date = RPB x P_J2000``, where ``P_J2000`` is
+    a vector in the Geocentric Celestial Reference System, and P_date is the
+    vector with respect to the Celestial Intermediate Reference System at that
+    date but with nutation neglected.
 
-    A first order bias formulation is used, of sub-microarcsecond
-    accuracy compared with a full 3D rotation.
+    A first order bias formulation is used, of sub-microarcsecond accuracy
+    compared with a full 3D rotation.
     '''
 
     # Frame bias (IERS Conventions 2010, Eqs. 5.21 and 5.33)
-    DX = -0.016617 * as2r
-    DE = -0.0068192 * as2r
-    DR = -0.0146 * as2r
+    DX = -0.016617 * AS2R
+    DE = -0.0068192 * AS2R
+    DR = -0.0146 * AS2R
 
     # Precession matrix.
     rp = ltp_PMAT(jepoch)
 
     # Apply the bias
     rpb = array([])
-    rpb = append(rpb,  rp[0][0]    - rp[0][1]*DR + rp[0][2]*DX)
-    rpb = append(rpb,  rp[0][0]*DR + rp[0][1]    + rp[0][2]*DE)
-    rpb = append(rpb, -rp[0][0]*DX - rp[0][1]*DE + rp[0][2]   )
-    rpb = append(rpb,  rp[1][0]    - rp[1][1]*DR + rp[1][2]*DX)
-    rpb = append(rpb,  rp[1][0]*DR + rp[1][1]    + rp[1][2]*DE)
-    rpb = append(rpb, -rp[1][0]*DX - rp[1][1]*DE + rp[1][2]   )
-    rpb = append(rpb,  rp[2][0]    - rp[2][1]*DR + rp[2][2]*DX)
-    rpb = append(rpb,  rp[2][0]*DR + rp[2][1]    + rp[2][2]*DE)
-    rpb = append(rpb, -rp[2][0]*DX - rp[2][1]*DE + rp[2][2]   )
-    rpb = rpb.reshape(3,3)
+    rpb = append(rpb, rp[0][0] - rp[0][1]*DR + rp[0][2]*DX)
+    rpb = append(rpb, rp[0][0]*DR + rp[0][1] + rp[0][2]*DE)
+    rpb = append(rpb, -rp[0][0]*DX - rp[0][1]*DE + rp[0][2])
+    rpb = append(rpb, rp[1][0] - rp[1][1]*DR + rp[1][2]*DX)
+    rpb = append(rpb, rp[1][0]*DR + rp[1][1] + rp[1][2]*DE)
+    rpb = append(rpb, -rp[1][0]*DX - rp[1][1]*DE + rp[1][2])
+    rpb = append(rpb, rp[2][0] - rp[2][1]*DR + rp[2][2]*DX)
+    rpb = append(rpb, rp[2][0]*DR + rp[2][1] + rp[2][2]*DE)
+    rpb = append(rpb, -rp[2][0]*DX - rp[2][1]*DE + rp[2][2])
+    rpb = rpb.reshape(3, 3)
     return rpb
+
 
 def epj(dj):
     '''Julian Date to Julian Epoch'''
     # based on http://www.iausofa.org/2013_1202_C/sofa/epj.c
-    DJ00 = 2451545.0 # Reference epoch (J2000.0), Julian Date
-    DJY = 365.25 # Days per Julian year
-    jepoch = 2000.0 + (dj - DJ00)/DJY;
+    DJ00 = 2451545.0  # Reference epoch (J2000.0), Julian Date
+    DJY = 365.25  # Days per Julian year
+    jepoch = 2000.0 + (dj - DJ00)/DJY
     return jepoch
+
 
 def ra_dec(v):
     '''Convert a cartesian position matrix to RA and Dec'''
     x = v[0][0]
     y = v[1][0]
     z = v[2][0]
-    ra = math.atan2(y,x)
-    dec = math.atan2(z,sqrt(x*x + y*y))
+    ra = math.atan2(y, x)
+    dec = math.atan2(z, sqrt(x*x + y*y))
     return ra, dec

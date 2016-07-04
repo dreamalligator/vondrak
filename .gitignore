@@ -5,3 +5,4 @@ vondrak/docs/documentation.html
 vondrak/docs/_build
 dist
 build
+__pycache__
