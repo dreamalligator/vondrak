@@ -1,8 +1,9 @@
-import unittest
+# -*- coding: utf-8 -*-
+import pytest
 from vondrak import *
 
 
-class testPrecession(unittest.TestCase):
+class TestPrecession:
 
     def test_pecl(self):
         '''test long-term precession of the ecliptic'''
@@ -14,9 +15,8 @@ class testPrecession(unittest.TestCase):
             -0.40495491104576162693,
             +0.91433656053126552350
         ])
-        # print(pecl)
-        # print(pecl_test)
-        self.assertEqual(pecl.all(), pecl_test.all())
+
+        assert pecl.all() == pecl_test.all()
 
     def test_pequ(self):
         '''test long-term precession of the equator'''
@@ -28,9 +28,8 @@ class testPrecession(unittest.TestCase):
             -0.11719098023370257855,
             +0.94847708824082091796
         ])
-        # print(pequ)
-        # print(pequ_test)
-        self.assertEqual(pequ.all(), pequ_test.all())
+
+        assert pequ.all() == pequ_test.all()
 
     def test_pmat(self):
         '''test long-term precession matrix'''
@@ -54,9 +53,8 @@ class testPrecession(unittest.TestCase):
                 +0.94847708824082091796
             ]
         ])
-        # print(rp)
-        # print(rp_test)
-        self.assertEqual(rp.all(), rp_test.all())
+
+        assert rp.all() == rp_test.all()
 
     def test_pbmat(self):
         '''test long-term precession matrix, including GCRS frame bias'''
@@ -80,13 +78,12 @@ class testPrecession(unittest.TestCase):
                 +0.94847706065103424635
             ]
         ])
-        # print(rpxb)
-        # print(rpxb_test)
-        self.assertEqual(rpxb.all(), rpxb_test.all())
+
+        assert rpxb.all() == rpxb_test.all()
 
     def test_epj(self):
         '''test julian date to julian epoch'''
 
         epj0 = epj(1219339.078000)
         epj1 = -1373.5959534565  # julian epoch
-        self.assertAlmostEqual(epj0, epj1, 10)
+        assert epj0 == epj1

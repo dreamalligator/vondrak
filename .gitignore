@@ -6,3 +6,5 @@ vondrak/docs/_build
 dist
 build
 __pycache__
+.cache
+.eggs

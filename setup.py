@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """Vondrak Python package setup."""
 
 import os
+import sys
 from setuptools import setup
 from vondrak import __version__
 
@@ -16,15 +18,14 @@ setup(
     version=__version__,
     description=("A Python implementation of Vondrák's long term precession "
                  "model and Fortran code."),
-    long_description=read('readme.rst'),
+    long_description=read('README.rst'),
     url='https://github.com/digitalvapor/vondrak',
     download_url='https://github.com/digitalvapor/vondrak/tarball/{0}'
         .format(__version__),
     author='Tom Spalding',
     author_email='tom@antivapor.net',
     keywords=['astronomy', 'precession', 'vondrak', 'space', 'proper motion'],
-    license=('Creative Commons Attribution-ShareAlike 4.0 International '
-             'License'),
+    license='MIT',
     packages=[
         'vondrak',
         'vondrak.tests',
@@ -35,7 +36,10 @@ setup(
     install_requires=['numpy'],
     classifiers=[
         'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
@@ -44,5 +48,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Topic :: Scientific/Engineering :: Astronomy',
-    ])
+        'Topic :: Scientific/Engineering :: Astronomy'
+    ],
+    tests_require=['pytest'])

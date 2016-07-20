@@ -29,6 +29,11 @@ Documentation
 
 View the docs at `digitalvapor.github.io/vondrak <https://digitalvapor.github.io/vondrak>`_, or generate with ``make html`` in the ``docs`` folder.
 
+Tests
+=====
+
+Tests use the `pyttest <https://github.com/pytest-dev/pytest>`_ framework. Simply run ``py.test``.
+
 License
 =======
 

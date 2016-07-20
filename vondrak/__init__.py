@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from numpy import array, sin, cos, sqrt, append
 import math
 
-__version__ = 0.4
+__version__ = '1.0.0'
 
 # 2Pi
 TAU = 6.283185307179586476925287e0
@@ -22,7 +23,8 @@ def ltp_pecl(jepoch):
 
     ``ltp_pecl`` generates the unit vector for the pole of the ecliptic, using
     the series for Pₐ, Qₐ. The vector is with respect to the J2000.0 mean
-    equator and equinox.'''
+    equator and equinox.
+    '''
 
     # There is a typographical error in the original coefficient
     # C₇ for Qₐ should read 198.296701 instead of 198.296071
@@ -224,7 +226,8 @@ def pdp(a, b):
 
     Given two p-vectors (a and b)
 
-    Return a * b'''
+    Return a * b
+    '''
 
     # this is akin to the SOFA iauPdp, but it handles 3x3 square
     # matrices times (dot) column vectors 3x1
