@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 from vondrak import *
-
+from decimal import Decimal
 
 class TestPrecession:
 
@@ -86,4 +86,6 @@ class TestPrecession:
 
         epj0 = epj(1219339.078000)
         epj1 = -1373.5959534565  # julian epoch
-        assert epj0 == epj1
+
+        d = abs(Decimal(str(epj1)).as_tuple().exponent)
+        assert round(epj0 - epj1, d) == 0
