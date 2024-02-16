@@ -26,14 +26,14 @@ The only dependency is `numpy <https://github.com/numpy/numpy>`_.
 Install
 =======
 
-To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip3 install vondrak``. For Python 2, use ``pip``. All code is hosted at `github.com/digitalvapor/vondrak <https://github.com/digitalvapor/vondrak>`_.
+To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip3 install vondrak``. For Python 2, use ``pip``. All code is hosted at `github.com/dreamalligator/vondrak <https://github.com/dreamalligator/vondrak>`_.
 
-Alternatively, clone the repo ``git clone https://github.com/digitalvapor/vondrak``, and install from source with ``python3 setup.py install``.
+Alternatively, clone the repo ``git clone https://github.com/dreamalligator/vondrak``, and install from source with ``python3 setup.py install``.
 
 Documentation
 =============
 
-View the docs at `digitalvapor.github.io/vondrak <https://digitalvapor.github.io/vondrak>`_, or generate with ``make html`` in the ``docs`` folder.
+View the docs at `dreamalligator.github.io/vondrak <https://dreamalligator.github.io/vondrak>`_, or generate with ``make html`` in the ``docs`` folder.
 
 Development
 =====

@@ -5,10 +5,10 @@ There is only one dependency for Vondrak, `NumPy <http://www.numpy.org/>`_. You 
 
     ``pip3 install vondrak``
 
-Alternatively, clone the repo ``git clone https://github.com/digitalvapor/vondrak``, and install from source with ``python3 setup.py install``.
+Alternatively, clone the repo ``git clone https://github.com/dreamalligator/vondrak``, and install from source with ``python3 setup.py install``.
 
 If you have any problems with installation, or would like to suggest an improvement, simply create an issue on the project's Github page:
 
-    https://github.com/digitalvapor/vondrak
+    https://github.com/dreamalligator/vondrak
 
 Cheers!

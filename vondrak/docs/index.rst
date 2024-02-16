@@ -13,8 +13,8 @@ You can also visit:
 
 * Official `Python Package Index <https://pypi.python.org/pypi/vondrak>`_
   entry
-* GitHub `project page <https://github.com/digitalvapor/vondrak/>`_
-* GitHub `issue tracker <https://github.com/digitalvapor/vondrak/issues>`_
+* GitHub `project page <https://github.com/dreamalligator/vondrak/>`_
+* GitHub `issue tracker <https://github.com/dreamalligator/vondrak/issues>`_
 
 Table of Contents
 =================
