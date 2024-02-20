@@ -8,17 +8,16 @@ import sys
 from setuptools import setup
 from vondrak import __version__
 
-
-def read(*filenames):
-    """It is handy to have both a readme and load it for long_description"""
-    return open(os.path.join(os.path.dirname(__file__), *filenames)).read()
+"""It is handy to have both a readme and load it for long_description"""
+with open("README.rst", "r") as f:
+	long_description_readme = f.read()
 
 setup(
     name='vondrak',
     version=__version__,
     description=("A Python implementation of Vondrák's long term precession "
                  "model and Fortran code."),
-    long_description=read('README.rst'),
+    long_description=long_description_readme,
     url='https://github.com/digitalvapor/vondrak',
     download_url='https://github.com/digitalvapor/vondrak/tarball/{0}'
         .format(__version__),
