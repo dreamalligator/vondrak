@@ -1,0 +1,9 @@
+# required
+numpy
+
+# tests
+pytest
+
+# docs
+sphinx
+jupyterlab

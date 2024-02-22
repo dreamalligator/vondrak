@@ -2,7 +2,7 @@
 from numpy import array, sin, cos, sqrt, append
 import math
 
-__version__ = '1.0.1'
+__version__ = '1.1.0'
 
 # 2Pi
 TAU = 6.283185307179586476925287e0

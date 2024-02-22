@@ -42,9 +42,9 @@ Setup a conda environment by simply running ``conda env create --file environmen
 Tests
 =====
 
-Tests use the `pyttest <https://github.com/pytest-dev/pytest>`_ framework. Simply run ``py.test``.
+Tests use the `pyttest <https://github.com/pytest-dev/pytest>`_ framework. Simply run ``pytest``.
 
 License
 =======
 
-This work is licensed under a `Creative Commons Attribution-ShareAlike 4.0 International License <http://creativecommons.org/licenses/by-sa/4.0/>`_.
+MIT

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments
+
+sudo apt install \
+  python3-venv
