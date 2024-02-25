@@ -27,11 +27,11 @@ jobs:
       - run: pytest
   docs:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./vondrak/docs
     steps:
       - uses: actions/checkout@v4
       - run: pip install -r requirements.txt
+      - run: sudo apt install pandoc
       - run: jupyter nbconvert examples.ipynb --to rst
+        working-directory: ./vondrak/docs
       - run: make html
+        working-directory: ./vondrak/docs

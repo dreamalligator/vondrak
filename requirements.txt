@@ -7,3 +7,7 @@ pytest
 # docs
 sphinx
 jupyterlab
+
+# vondrak dev mode
+# https://setuptools.pypa.io/en/latest/userguide/development_mode.html
+--editable .
