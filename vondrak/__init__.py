@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from numpy import array, sin, cos, sqrt, append
-import math
+from math import atan2, cos, sin, sqrt
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 
 # 2Pi
 TAU = 6.283185307179586476925287e0
@@ -338,6 +337,6 @@ def ra_dec(v):
     x = v[0][0]
     y = v[1][0]
     z = v[2][0]
-    ra = math.atan2(y, x)
-    dec = math.atan2(z, sqrt(x*x + y*y))
+    ra = atan2(y, x)
+    dec = atan2(z, sqrt(x*x + y*y))
     return ra, dec

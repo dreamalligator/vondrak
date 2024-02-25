@@ -1,6 +1,3 @@
-# required
-numpy
-
 # tests
 pytest
 

@@ -18,13 +18,10 @@ A Python implementation of Vondrák's long term precession model and Fortran cod
 * `New precession expressions, valid for long time intervals <http://www.aanda.org/articles/aa/pdf/2011/10/aa17274-11.pdf>`_ (2011)
 * `New precession expressions, valid for long time intervals (Corrigendum) <http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html>`_ (2012)
 
-Dependencies
-============
-
-The only dependency is `numpy <https://github.com/numpy/numpy>`_.
-
 Install
 =======
+
+There are no dependencies for Vondrak!
 
 To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip3 install vondrak``. For Python 2, use ``pip``. All code is hosted at `github.com/dreamalligator/vondrak <https://github.com/dreamalligator/vondrak>`_.
 
