@@ -1,0 +1,7 @@
+name: vondrak
+channels:
+  - conda-forge
+dependencies:
+  - python<3.14 # max current support 3.13
+  - numpy
+  - pytest

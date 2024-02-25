@@ -2,8 +2,14 @@
 Vondrák's Long Term Precession Model
 ====================================
 
-.. image:: https://travis-ci.org/digitalvapor/vondrak.svg
-    :target: https://travis-ci.org/digitalvapor/vondrak
+.. image:: https://img.shields.io/pypi/pyversions/vondrak
+   :alt: PyPI - Python Version
+
+.. image:: https://img.shields.io/github/license/dreamalligator/vondrak
+   :alt: GitHub License
+
+.. image:: https://img.shields.io/pypi/v/vondrak
+   :alt: PyPI - Version
 
 A Python implementation of Vondrák's long term precession model and Fortran code.
 
@@ -28,6 +34,10 @@ Documentation
 =============
 
 View the docs at `digitalvapor.github.io/vondrak <https://digitalvapor.github.io/vondrak>`_, or generate with ``make html`` in the ``docs`` folder.
+
+Development
+=====
+Setup a conda environment by simply running ``conda env create --file environment.yml`` and activate by ``conda activate vondrak``
 
 Tests
 =====
