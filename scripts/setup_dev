@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments
+
+#
+# 1. install dev deps
+#
+
+sudo apt install -y \
+  pandoc \
+  python3-venv
+
+#
+# 2. create virtual env
+#
+#   python -m venv .venv
+#
+# 3. activate virtual env
+#
+#   source .venv/bin/activate
+#
