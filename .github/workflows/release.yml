@@ -1,0 +1,63 @@
+# https://github.com/pypa/twine/blob/main/.github/workflows/release.yml
+
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: "Build dists"
+    runs-on: "ubuntu-latest"
+    environment:
+      name: "publish"
+
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v4"
+
+      - name: "Setup Python"
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.x"
+
+      - name: "Install dependencies"
+        run: python -m pip install build
+
+      - name: "Build dists"
+        run: |
+          SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct) \ # https://reproducible-builds.org/docs/source-date-epoch/
+          python -m build
+
+      - name: "Upload dists"
+        uses: "actions/upload-artifact@v4"
+        with:
+          name: "dist"
+          path: "dist/"
+          if-no-files-found: error
+          retention-days: 5
+
+publish:
+    name: "Publish to PyPI"
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - build
+    permissions:
+      contents: write
+      id-token: write
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - name: "Download dists"
+      uses: "actions/download-artifact@v4"
+      with:
+        name: "dist"
+        path: "dist/"
+
+    - name: "Publish dists to PyPI"
+      uses: "pypa/gh-action-pypi-publish@release/v1"
