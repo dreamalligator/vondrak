@@ -19,3 +19,11 @@ sudo apt install -y \
 #
 #   source .venv/bin/activate
 #
+# 4. install editable vondrak for development
+#
+#   pip install -r requirements.txt
+#
+# 5. run tests
+#
+#   pytest -vv
+#

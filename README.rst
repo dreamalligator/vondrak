@@ -36,8 +36,9 @@ Documentation
 View the docs at `dreamalligator.github.io/vondrak <https://dreamalligator.github.io/vondrak>`_, or generate with ``make html`` in the ``docs`` folder.
 
 Development
-=====
-Setup a conda environment by simply running ``conda env create --file environment.yml`` and activate by ``conda activate vondrak``
+===========
+
+Setup a conda environment by simply running ``conda env create --file environment.yml`` and activate by ``conda activate vondrak``.
 
 Tests
 =====
