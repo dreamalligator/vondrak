@@ -21,17 +21,14 @@ A Python implementation of Vondrák's long term precession model and Fortran cod
 * `New precession expressions, valid for long time intervals <http://www.aanda.org/articles/aa/pdf/2011/10/aa17274-11.pdf>`_ (2011)
 * `New precession expressions, valid for long time intervals (Corrigendum) <http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html>`_ (2012)
 
-Dependencies
-============
-
-The only dependency is `numpy <https://github.com/numpy/numpy>`_.
-
 Install
 =======
 
-To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip3 install vondrak``. For Python 2, use ``pip``. All code is hosted at `github.com/dreamalligator/vondrak <https://github.com/dreamalligator/vondrak>`_.
+There are no dependencies for Vondrák!
 
-Alternatively, clone the repo ``git clone https://github.com/dreamalligator/vondrak``, and install from source with ``python3 setup.py install``.
+To install the `Vondrak Python package <https://pypi.python.org/pypi/vondrak>`_ via `PyPI <https://pypi.python.org/pypi>`_, simply ``pip install vondrak``. All code is hosted at `github.com/dreamalligator/vondrak <https://github.com/dreamalligator/vondrak>`_ and mirrored at `gitlab.com/dreamalligator/vondrak <https://gitlab.com/dreamalligator/vondrak>`.
+
+Alternatively, clone the repo ``git clone https://github.com/dreamalligator/vondrak``, and install from source with ``python setup.py install``.
 
 Documentation
 =============

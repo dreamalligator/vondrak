@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
-from numpy import array, sin, cos, sqrt, append
+from array import array
+from math import sin, cos, sqrt, append
 
 __version__ = '1.1.2'
 
