@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-import pytest
-from vondrak import *
 from decimal import Decimal
+from numpy import array
+from vondrak import ltp_pecl, ltp_pequ, ltp_pmat, ltp_pbmat, epj
+
+EPJ = -1373.5959534565  # julian epoch
 
 class TestPrecession:
 
     def test_pecl(self):
         '''test long-term precession of the ecliptic'''
 
-        epj = -1373.5959534565  # julian epoch
-        pecl = ltp_pecl(epj)
+        pecl = ltp_pecl(EPJ)
         pecl_test = array([
             +0.00041724785764001342,
             -0.40495491104576162693,
@@ -21,8 +22,7 @@ class TestPrecession:
     def test_pequ(self):
         '''test long-term precession of the equator'''
 
-        epj = -1373.5959534565  # julian epoch
-        pequ = ltp_pequ(epj)
+        pequ = ltp_pequ(EPJ)
         pequ_test = array([
             -0.29437643797369031532,
             -0.11719098023370257855,
@@ -34,8 +34,7 @@ class TestPrecession:
     def test_pmat(self):
         '''test long-term precession matrix'''
 
-        epj = -1373.5959534565  # julian epoch
-        rp = ltp_pmat(epj)
+        rp = ltp_pmat(EPJ)
         rp_test = array([
             [
                 +0.68473390570729557360,
@@ -59,8 +58,7 @@ class TestPrecession:
     def test_pbmat(self):
         '''test long-term precession matrix, including GCRS frame bias'''
 
-        epj = -1373.5959534565  # julian epoch
-        rpxb = ltp_pbmat(epj)
+        rpxb = ltp_pbmat(EPJ)
         rpxb_test = array([
             [
                 +0.68473392912753224372,

@@ -11,6 +11,9 @@ Vondrák's Long Term Precession Model
 .. image:: https://img.shields.io/pypi/v/vondrak
    :alt: PyPI - Version
 
+.. image:: https://img.shields.io/badge/linting-pylint-yellowgreen
+   :alt: Pylint
+
 A Python implementation of Vondrák's long term precession model and Fortran code.
 
 * `Some New Thoughts About Long-Term Precession <http://syrte.obspm.fr/jsr/journees2010/pdf/Vondrak.pdf>`_ (2010)
