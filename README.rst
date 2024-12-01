@@ -16,10 +16,10 @@ Vondrák's Long Term Precession Model
 
 A Python implementation of Vondrák's long term precession model and Fortran code.
 
-* `Some New Thoughts About Long-Term Precession <http://syrte.obspm.fr/jsr/journees2010/pdf/Vondrak.pdf>`_ (2010)
-* `New Long-Term Expressions for Precession <http://syrte.obspm.fr/jsr/journees2011/pdf/vondrak.pdf>`_ (2011)
-* `New precession expressions, valid for long time intervals <http://www.aanda.org/articles/aa/pdf/2011/10/aa17274-11.pdf>`_ (2011)
-* `New precession expressions, valid for long time intervals (Corrigendum) <http://www.aanda.org/articles/aa/abs/2012/05/aa17274e-11/aa17274e-11.html>`_ (2012)
+* `Some New Thoughts About Long-Term Precession <https://syrte.obspm.fr/jsr/journees2010/pdf/Vondrak.pdf>`_ (2010)
+* `New Long-Term Expressions for Precession <https://syrte.obspm.fr/jsr/journees2011/pdf/vondrak.pdf>`_ (2011)
+* `New precession expressions, valid for long time intervals <https://www.aanda.org/articles/aa/pdf/2011/10/aa17274-11.pdf>`_ (2011)
+* `New precession expressions, valid for long time intervals (Corrigendum) <https://www.aanda.org/articles/aa/pdf/2012/05/aa17274e-11.pdf>`_ (2012)
 
 Install
 =======
