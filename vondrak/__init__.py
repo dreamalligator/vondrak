@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from numpy import array, sin, cos, sqrt, append
 import math
+from numpy import array, sin, cos, sqrt, append
 
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 # 2Pi
 TAU = 6.283185307179586476925287e0
@@ -90,8 +90,7 @@ def ltp_pecl(jepoch):
     vec0 = P
     vec1 = -Q*C - Z*S
     vec2 = -Q*S + Z*C
-    vec = array([vec0, vec1, vec2])
-    return vec
+    return array([vec0, vec1, vec2])
 
 
 def ltp_pequ(jepoch):
@@ -168,10 +167,9 @@ def ltp_pequ(jepoch):
     veq1 = Y
     W = X*X + Y*Y
     veq2 = 0.0
-    if(W < 1.0):
+    if W < 1.0:
         veq2 = sqrt(1.0-W)
-    veq = array([veq0, veq1, veq2])
-    return veq
+    return array([veq0, veq1, veq2])
 
 
 def pxp(a, b):
@@ -190,8 +188,7 @@ def pxp(a, b):
     axb = array([])
     axb = append(axb, ya*zb - za*yb)
     axb = append(axb, za*xb - xa*zb)
-    axb = append(axb, xa*yb - ya*xb)
-    return axb
+    return append(axb, xa*yb - ya*xb)
 
 
 def pn(p):
@@ -202,11 +199,13 @@ def pn(p):
     Return modulus (r), and unit vector (u)
     '''
 
+
     # Modulus of p-vector
+    # http://www.iausofa.org/2013_1202_C/sofa/pn.c
     # http://www.iausofa.org/2013_1202_C/sofa/pm.c
     w = sqrt(p[0]*p[0] + p[1]*p[1] + p[2]*p[2])
     u = array([])
-    if(w == 0.0):
+    if w == 0.0:
         # zero a p-vector
         # http://www.iausofa.org/2013_1202_C/sofa/zp.c
         u = append(u, [0.0, 0.0, 0.0])
@@ -236,8 +235,7 @@ def pdp(a, b):
     for r in range(3):
         w = a[r][0]*b[0] + a[r][1]*b[1] + a[r][2]*b[2]
         row.append(w)
-    adb = array(row)
-    return adb
+    return array(row)
 
 
 def ltp_pmat(jepoch):
@@ -267,7 +265,7 @@ def ltp_pmat(jepoch):
 
     # Equinox (top row of matrix)
     V = pxp(peqr, pecl)  # P-vector outer product.
-    w, EQX = pn(V)  # Convert a p-vector into modulus and unit vector
+    _w, EQX = pn(V)  # Convert a p-vector into modulus and unit vector
 
     # Middle row of matrix
     V = pxp(peqr, EQX)
@@ -275,8 +273,7 @@ def ltp_pmat(jepoch):
     # The matrix elements
     rp = array([])
     rp = append(rp, [EQX, V, peqr])
-    rp = rp.reshape(3, 3)
-    return rp
+    return rp.reshape(3, 3)
 
 
 def ltp_pbmat(jepoch):
@@ -320,8 +317,7 @@ def ltp_pbmat(jepoch):
     rpb = append(rpb, rp[2][0] - rp[2][1]*DR + rp[2][2]*DX)
     rpb = append(rpb, rp[2][0]*DR + rp[2][1] + rp[2][2]*DE)
     rpb = append(rpb, -rp[2][0]*DX - rp[2][1]*DE + rp[2][2])
-    rpb = rpb.reshape(3, 3)
-    return rpb
+    return rpb.reshape(3, 3)
 
 
 def epj(dj):
