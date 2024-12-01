@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
-from numpy import array
+from array import array
 from vondrak import ltp_pecl, ltp_pequ, ltp_pmat, ltp_pbmat, epj
 
 EPJ = -1373.5959534565  # julian epoch

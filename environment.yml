@@ -3,5 +3,4 @@ channels:
   - conda-forge
 dependencies:
   - python<3.15 # max current support 3.14
-  - numpy
   - pytest

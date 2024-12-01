@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
-from numpy import array, sin, cos, sqrt, append
+from array import array
+from math import sin, cos, sqrt, append
 
-__version__ = '1.1.2'
+__version__ = '1.2.0'
 
 # 2Pi
 TAU = 6.283185307179586476925287e0

@@ -16,7 +16,7 @@ components of the matrix over 400000 years.
 
 .. parsed-literal::
 
-    Populating the interactive namespace from numpy and matplotlib
+    Populating the interactive namespace from matplotlib
 
 
 .. code:: python

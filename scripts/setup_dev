@@ -8,7 +8,7 @@
 
 sudo apt install -y \
   pandoc \
-  python3-venv
+  python-venv
 
 #
 # 2. create virtual env
